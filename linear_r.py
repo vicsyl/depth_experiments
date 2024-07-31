@@ -47,6 +47,7 @@ def create_hist(apt, room, mses, coeffs, shifts, show=True):
 
     plt.figure()
     plt.title(f"Scale coefficients for {apt}/{room}")
+    plt.xlabel("no unit")
     plt.ylabel("# data points")
 
     # max_dist_value = 100
