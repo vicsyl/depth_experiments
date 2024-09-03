@@ -130,7 +130,8 @@ def run_apt_room(apt, room, show=True):
 
     mge_in = f"{EST_IN_DIR}/{apt}_{room}"
 
-    depth_ests = set(glob.glob(f"{mge_in}/*.color_depth.png"))
+    #depth_ests = set(glob.glob(f"{mge_in}/*.color_depth.png"))
+    depth_ests = set(glob.glob(f"{mge_in}/*_original_depth.png"))
     #depth_ests = set(glob.glob(f"{mge_in}/*.color_depth.npy"))
     depth_ests = name_map(depth_ests)
     print(f"depth_est length: {len(depth_ests)}")
@@ -147,8 +148,8 @@ def run_apt_room(apt, room, show=True):
     mses = []
     coeffs = []
     shifts = []
-
-    for idx, (color_file, color_file_path) in enumerate(list(color_files.items())[:MAX_FILES]):
+    color_files = list(color_files.items())[:MAX_FILES]
+    for idx, (color_file, color_file_path) in enumerate(color_files):
 
         if (idx + 1) % 100 == 0:
             print(f"{idx}/{len(color_files)}")
@@ -185,7 +186,7 @@ def run_apt_room(apt, room, show=True):
         axs[0, 1].imshow(depth_gt_img)
         axs[1, 0].title.set_text("depth estimate")
         axs[1, 0].imshow(depth_est_img)
-        axs[1, 1].title.set_text("depth estimate inverted depth")
+        # axs[1, 1].title.set_text("depth estimate inverted depth")
         # axs[1, 1].imshow(depth_est_v_img[:, :, 0])
         dir = f"{DATA_DIR}/gallery/{apt}_{room}"
         Path(dir).mkdir(parents=True, exist_ok=True)
@@ -208,11 +209,17 @@ def run_apt_room(apt, room, show=True):
         coeffs.append(coeff)
         shifts.append(shift)
 
+    with open(f"{DATA_DIR}/stats.txt", "w") as f:
+        f.write("# color_file, mse, coeff, shift \n")
+        for color_file, mse, coeff, shift in zip(color_files, mses, coeffs, shifts):
+            f.write(f"{color_file[0]}, {mse:.04f}, {coeff:.04f}, {shift:04f}\n")
+
     return np.array(mses), np.array(coeffs), np.array(shifts)
 
 
 # DATA_DIR = "./data/metric_3d_K_new"
-DATA_DIR = "./data/metric_3d_no_K"
+# DATA_DIR = "./data/metric_3d_no_K"
+DATA_DIR = "./data/metric_3d_K_new_small"
 #DATA_DIR = "./data/metric_3d_rm_local"
 MAX_FILES = 100
 APT_ROOMS = [('apt1', 'kitchen'), ('apt1', 'living'), ('apt2', 'bed'), ('apt2', 'kitchen'), ('apt2', 'living'),
@@ -221,7 +228,8 @@ APT_ROOMS = [('apt1', 'kitchen'), ('apt1', 'living'), ('apt2', 'bed'), ('apt2', 
 # APT_ROOMS = [('apt1', 'kitchen')]
 
 # EST_IN_DIR = f"../Metric3D/show_dirs/vit.raft5.giant2/20240807_015734/vis" # K
-EST_IN_DIR = f"../Metric3D/show_dirs/vit.raft5.giant2/20240807_103753/vis" # no K
+# EST_IN_DIR = f"../Metric3D/show_dirs/vit.raft5.giant2/20240807_103753/vis" # no K
+EST_IN_DIR = f"../Metric3D/show_dirs/vit.raft5.small/20240903_232732/vis" # no K
 
 JUST_REGENERATE = False
 
