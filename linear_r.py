@@ -209,7 +209,7 @@ def run_apt_room(apt, room, show=True):
         coeffs.append(coeff)
         shifts.append(shift)
 
-    with open(f"{DATA_DIR}/stats.txt", "w") as f:
+    with open(f"{DATA_DIR}/{apt}_{room}_stats.txt", "w") as f:
         f.write("# color_file, mse, coeff, shift \n")
         for color_file, mse, coeff, shift in zip(color_files, mses, coeffs, shifts):
             f.write(f"{color_file[0]}, {mse:.04f}, {coeff:.04f}, {shift:04f}\n")
