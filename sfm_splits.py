@@ -17,7 +17,7 @@ def run_for_scene(scenes):
     print("Paths:\n", "\n".join(paths))
 
     # TODO for now only random splits....
-    prefix = "all_"
+    prefix = "big_"
     split_map = {"train": 0.8, "eval": 0.1, "test": 0.1}
     assert np.isclose(sum([split_map[k] for k in split_map.keys()]), 1.0)
     print(f"input split map: {split_map}")
