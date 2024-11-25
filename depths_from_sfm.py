@@ -204,7 +204,7 @@ def run(in_dir,
         print(f"Number of images: {len(image_items)}")
 
         # marigold_rel_path = "../Marigold"
-        marigold_rel_path = "../marigold"
+        marigold_rel_path = "../marigold_private"
 
         for _, colmap_image in tqdm(image_items):
 
@@ -349,7 +349,7 @@ def run_for_scene(args):
             scenes = args.scenes
 
         # marigold_rel_path = "../Marigold"
-        marigold_rel_path = "../marigold"
+        marigold_rel_path = "../marigold_private"
 
         print("create the symlinks")
         print(f"pushd {marigold_rel_path}/data/sfm")
