@@ -202,11 +202,15 @@ def run(in_dir,
         if max_items:
             image_items = image_items[:max_items]
         print(f"Number of images: {len(image_items)}")
+
+        # marigold_rel_path = "../Marigold"
+        marigold_rel_path = "../marigold"
+
         for _, colmap_image in tqdm(image_items):
 
             ds_rgb_path = str(pathlib.Path(colmap_image.name).relative_to(pathlib.Path("commons")))
             ds_rgb_path = os.path.join(orig_out_dir_images, ds_rgb_path)
-            eff_rgb_path = os.path.join("../Marigold/data/sfm", ds_rgb_path)
+            eff_rgb_path = os.path.join(f"{marigold_rel_path}/data/sfm", ds_rgb_path)
             img_np = cv.imread(eff_rgb_path)
 
             c_width, c_height, calib_matrix, camera_params, dist_coeffs, swapped = get_camera_params(reconstruction,
@@ -301,7 +305,7 @@ def run(in_dir,
 
                 if undistort:
                     ds_rgb_path = os.path.join(out_dir_images, f"{depth_data_file_key}.png")
-                    save_to = os.path.join("../Marigold/data/sfm", ds_rgb_path)
+                    save_to = os.path.join(f"{marigold_rel_path}/data/sfm", ds_rgb_path)
                     cv.imwrite(save_to, img_np)
 
                 depth_data_rel_path = os.path.join(rel_out_dir, f"{depth_data_file_key}.npz")
@@ -344,14 +348,17 @@ def run_for_scene(args):
         else:
             scenes = args.scenes
 
+        # marigold_rel_path = "../Marigold"
+        marigold_rel_path = "../marigold"
+
         print("create the symlinks")
-        print("pushd ../Marigold/data/sfm")
+        print(f"pushd {marigold_rel_path}/data/sfm")
         for scene in scenes:
             print(f"ln -s ../../../../datasets/megascenes/{scene}/images/commons ./images/{scene}")
 
         print("create dirs for undistorted imgs")
         for scene in scenes:
-            print(f"mkdir -p ../Marigold/data/sfm/undistorted_images/{scene}")
+            print(f"mkdir -p {marigold_rel_path}/data/sfm/undistorted_images/{scene}")
 
         for scene in scenes:
             print(f"Processing scene {scene} ...")
@@ -361,10 +368,10 @@ def run_for_scene(args):
             dir_list = "\n".join([r for r in reconstruction_dirs])
             print(f"Found reconstruction directories: {dir_list}\n")
 
-            output_dir_data = f"../Marigold/data/sfm/data/{scene}"
+            output_dir_data = f"{marigold_rel_path}/data/sfm/data/{scene}"
             output_dir_imgs = f"undistorted_images/{scene}" if args.undistort else f"images/{scene}"
             orig_dir_imgs = f"images/{scene}"
-            rel_out_dir = str(pathlib.Path(output_dir_data).relative_to(pathlib.Path("../Marigold/data/sfm")))
+            rel_out_dir = str(pathlib.Path(output_dir_data).relative_to(pathlib.Path(f"{marigold_rel_path}/data/sfm")))
             for i, rec_dir in enumerate(reconstruction_dirs):
                 run(rec_dir,
                     output_dir_data,
