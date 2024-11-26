@@ -410,9 +410,9 @@ if __name__ == '__main__':
     parser.add_argument("--output_dir", help="path to output dir", required=False)
     parser.add_argument("--max_items", help="max images per reconstruction", type=int, required=False, default=None)
     #
-    parser.add_argument("--undistort", action="store_true", required=False, default=True)
-    # TODO does not work
-    # parser.add_argument("--no-undistort", action="store_false", required=False)
+    parser.add_argument("--undistort", action="store_true", required=False)
+    parser.add_argument("--no-undistort", action="store_false", required=False)
+
     args = parser.parse_args()
 
     if args.scenes is None and (args.input_dir is None or args.output_dir is None):
