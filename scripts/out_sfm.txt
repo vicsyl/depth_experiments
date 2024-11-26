@@ -1828,3 +1828,15 @@ ambiguity (len(uv) == 2): mean: 0.000, 19625 items
 exception: mean: 0.000, 19625 items
 valid_points: mean: 300070.150, 113 items
 Elapsed time: 5841.264 s.
+
+RCI:
+
+Stats:
+swapped: mean: 0.079, 19223 items
+inconsistent dimensions: mean: 0.000, 19223 items
+no uv points: mean: 0.001, 19223 items
+out_of_image: mean: 0.002, 19202 items
+ambiguity (len(uv) == 2): mean: 0.000, 19202 items
+exception: mean: 0.000, 19202 items
+valid_points: mean: 299935.473, 112 items
+Elapsed time: 2824.274 s.

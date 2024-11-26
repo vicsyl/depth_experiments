@@ -9,10 +9,16 @@ from tqdm import tqdm
 
 
 def run_for_scene(scenes):
+
+    # CMP
+    # marigold_rel_path = "../Marigold"
+    # RCI
+    marigold_rel_path = "../marigold_private"
+
     if scenes[0].lower() == "all":
-        paths = sorted(list(glob.glob("../Marigold/data/sfm/data/*/data.txt")))
+        paths = sorted(list(glob.glob(f"{marigold_rel_path}/data/sfm/data/*/data.txt")))
     else:
-        paths = [f"../Marigold/data/sfm/data/{scene}/data.txt" for scene in scenes]
+        paths = [f"{marigold_rel_path}/data/sfm/data/{scene}/data.txt" for scene in scenes]
 
     print("Paths:\n", "\n".join(paths))
 
@@ -26,7 +32,7 @@ def run_for_scene(scenes):
     check_1 = False
     for k in split_map.keys():
         cum += split_map[k]
-        f = open(os.path.join("../Marigold/data/sfm", f"{prefix}{k}.txt"), "w")
+        f = open(os.path.join(f"{marigold_rel_path}/data/sfm", f"{prefix}{k}.txt"), "w")
         split_map[k] = (cum, f)
         assert cum < 1.000001
         if np.isclose(cum, 1.0):
@@ -51,6 +57,6 @@ def run_for_scene(scenes):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument("--scenes", nargs="+", help="scene (e.g., 'prasna_brana karluv most')", required=True)
+    parser.add_argument("--scenes", nargs="+", help="scene (e.g., 'prasna_brana karluv most')", required=False, default="all")
     args = parser.parse_args()
     run_for_scene(args.scenes)
