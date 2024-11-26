@@ -353,8 +353,10 @@ def run_for_scene(args):
 
         print("create the symlinks")
         print(f"pushd {marigold_rel_path}/data/sfm")
+        print("mkdir ./images")
         for scene in scenes:
             print(f"ln -s ../../../../datasets/megascenes/{scene}/images/commons ./images/{scene}")
+        print("popd")
 
         print("create dirs for undistorted imgs")
         for scene in scenes:
