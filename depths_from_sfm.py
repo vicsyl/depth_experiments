@@ -215,7 +215,7 @@ def run_for_indir(in_dir,
                 if len(Data.output) == 0:
                     Data.output.append("Missing reconstruction dirs:")
                 Data.output.append(in_dir)
-            return "missing"
+                return "missing"
             img_np = cv.imread(eff_rgb_path)
             c_width, c_height, calib_matrix, camera_params, dist_coeffs, swapped = get_camera_params(reconstruction,
                                                                                                      colmap_image,
