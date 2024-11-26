@@ -140,7 +140,8 @@ def run(in_dir,
         undistort=True,
         max_items=None,
         read_again=False,
-        write=True):
+        write=True,
+        just_check=False):
     """
     How it works:
 
@@ -211,8 +212,13 @@ def run(in_dir,
             ds_rgb_path = str(pathlib.Path(colmap_image.name).relative_to(pathlib.Path("commons")))
             ds_rgb_path = os.path.join(orig_out_dir_images, ds_rgb_path)
             eff_rgb_path = os.path.join(f"{marigold_rel_path}/data/sfm", ds_rgb_path)
+            if just_check:
+                if not os.path.exists(eff_rgb_path):
+                    if len(Data.output) == 0:
+                        Data.output.append("Missing reconstruction dirs:")
+                    Data.output.append(in_dir)
+                continue
             img_np = cv.imread(eff_rgb_path)
-
             c_width, c_height, calib_matrix, camera_params, dist_coeffs, swapped = get_camera_params(reconstruction,
                                                                                                      colmap_image,
                                                                                                      img_np)
@@ -385,7 +391,8 @@ def run_for_scene(args):
                     undistort=args.undistort,
                     max_items=args.max_items,
                     write=True,
-                    read_again=False)
+                    read_again=False,
+                    just_check=args.just_check)
 
     else:
         run(args.input_dir,
@@ -399,7 +406,12 @@ def run_for_scene(args):
             undistort=args.undistort,
             max_items=args.max_items,
             write=True,
-            read_again=False)
+            read_again=False,
+            just_check=args.just_check)
+
+
+class Data:
+    output = []
 
 
 if __name__ == '__main__':
@@ -414,6 +426,7 @@ if __name__ == '__main__':
     #
     parser.add_argument("--undistort", action="store_true", required=False)
     parser.add_argument("--no-undistort", action="store_false", required=False)
+    parser.add_argument("--just-check", action="store_true", required=False)
 
     args = parser.parse_args()
 
@@ -427,3 +440,6 @@ if __name__ == '__main__':
     e = time.time()
     Stats.print_stats()
     print(f"Elapsed time: {e-s:.03f} s.")
+
+    for line in Data.output:
+        print(line)
