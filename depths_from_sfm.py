@@ -217,7 +217,7 @@ def run(in_dir,
                     if len(Data.output) == 0:
                         Data.output.append("Missing reconstruction dirs:")
                     Data.output.append(in_dir)
-                continue
+                return "missing"
             img_np = cv.imread(eff_rgb_path)
             c_width, c_height, calib_matrix, camera_params, dist_coeffs, swapped = get_camera_params(reconstruction,
                                                                                                      colmap_image,
@@ -338,6 +338,7 @@ def run(in_dir,
                 print("debug me")
 
     Stats.stat_m["valid_points"].append(valid_points)
+    return None
 
 
 def run_for_scene(args):
@@ -381,18 +382,20 @@ def run_for_scene(args):
             orig_dir_imgs = f"images/{scene}"
             rel_out_dir = str(pathlib.Path(output_dir_data).relative_to(pathlib.Path(f"{marigold_rel_path}/data/sfm")))
             for i, rec_dir in enumerate(reconstruction_dirs):
-                run(rec_dir,
-                    output_dir_data,
-                    output_dir_imgs,
-                    orig_dir_imgs,
-                    i != 0,
-                    set(),
-                    rel_out_dir,
-                    undistort=args.undistort,
-                    max_items=args.max_items,
-                    write=True,
-                    read_again=False,
-                    just_check=args.just_check)
+                r = run(rec_dir,
+                        output_dir_data,
+                        output_dir_imgs,
+                        orig_dir_imgs,
+                        i != 0,
+                        set(),
+                        rel_out_dir,
+                        undistort=args.undistort,
+                        max_items=args.max_items,
+                        write=True,
+                        read_again=False,
+                        just_check=args.just_check)
+                if r is not None:
+                    break
 
     else:
         run(args.input_dir,
