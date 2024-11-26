@@ -31,7 +31,7 @@ def run_for_scene(scenes, max_per_scene, prefix):
     check_1 = False
     for k in split_map.keys():
         cum += split_map[k]
-        f = open(os.path.join(f"{marigold_rel_path}/data/sfm", f"{prefix}{k}.txt"), "w")
+        f = open(os.path.join(f"{marigold_rel_path}/data/sfm", f"{prefix}_{k}.txt"), "w")
         split_map[k] = (cum, f)
         assert cum < 1.000001
         if np.isclose(cum, 1.0):
