@@ -348,7 +348,7 @@ def run_for_scenes_or_indir(args):
     if args.input_dir is None:
 
         if args.scenes == ["all"]:
-            scenes = [pathlib.Path(i).parent.name for i in glob.glob(f"../datasets/megascenes/*/reconstruct")]
+            scenes = sorted([pathlib.Path(i).parent.name for i in glob.glob(f"../datasets/megascenes/*/reconstruct")])
             print(f"all scenes: {scenes}")
         else:
             scenes = args.scenes
