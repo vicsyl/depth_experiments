@@ -1,0 +1,1830 @@
+all scenes: ['tycho_brahe_johannes_kepler_prague', 'eiffel_tower', 'church_of_the_sacred_heart_prague', 'apollon_de_cassel_louvre', 'tgm_dejvice', 'statue_of_liberty', 'saint_wenceslaus_prague', 'sydney_opera', 'abraham_lincoln_lincoln_memorial', 'statue_of_black_madonna_prague', 'sacre_couer', 'joseph_ii_prague', 'saint_ignatius_church_prague', 'singing_fountain_prague_castle', 'data', 'letohradek_kralovny_anny', 'st_george_prague_castle', 'arc_de_triomf_barcelona', 'karluv_most', 'prasna_brana', 'notre_dame_paris', 'sagrada_familia']
+create the symlinks
+pushd ../Marigold/data/sfm
+ln -s ../../../../datasets/megascenes/tycho_brahe_johannes_kepler_prague/images/commons ./images/tycho_brahe_johannes_kepler_prague
+ln -s ../../../../datasets/megascenes/eiffel_tower/images/commons ./images/eiffel_tower
+ln -s ../../../../datasets/megascenes/church_of_the_sacred_heart_prague/images/commons ./images/church_of_the_sacred_heart_prague
+ln -s ../../../../datasets/megascenes/apollon_de_cassel_louvre/images/commons ./images/apollon_de_cassel_louvre
+ln -s ../../../../datasets/megascenes/tgm_dejvice/images/commons ./images/tgm_dejvice
+ln -s ../../../../datasets/megascenes/statue_of_liberty/images/commons ./images/statue_of_liberty
+ln -s ../../../../datasets/megascenes/saint_wenceslaus_prague/images/commons ./images/saint_wenceslaus_prague
+ln -s ../../../../datasets/megascenes/sydney_opera/images/commons ./images/sydney_opera
+ln -s ../../../../datasets/megascenes/abraham_lincoln_lincoln_memorial/images/commons ./images/abraham_lincoln_lincoln_memorial
+ln -s ../../../../datasets/megascenes/statue_of_black_madonna_prague/images/commons ./images/statue_of_black_madonna_prague
+ln -s ../../../../datasets/megascenes/sacre_couer/images/commons ./images/sacre_couer
+ln -s ../../../../datasets/megascenes/joseph_ii_prague/images/commons ./images/joseph_ii_prague
+ln -s ../../../../datasets/megascenes/saint_ignatius_church_prague/images/commons ./images/saint_ignatius_church_prague
+ln -s ../../../../datasets/megascenes/singing_fountain_prague_castle/images/commons ./images/singing_fountain_prague_castle
+ln -s ../../../../datasets/megascenes/data/images/commons ./images/data
+ln -s ../../../../datasets/megascenes/letohradek_kralovny_anny/images/commons ./images/letohradek_kralovny_anny
+ln -s ../../../../datasets/megascenes/st_george_prague_castle/images/commons ./images/st_george_prague_castle
+ln -s ../../../../datasets/megascenes/arc_de_triomf_barcelona/images/commons ./images/arc_de_triomf_barcelona
+ln -s ../../../../datasets/megascenes/karluv_most/images/commons ./images/karluv_most
+ln -s ../../../../datasets/megascenes/prasna_brana/images/commons ./images/prasna_brana
+ln -s ../../../../datasets/megascenes/notre_dame_paris/images/commons ./images/notre_dame_paris
+ln -s ../../../../datasets/megascenes/sagrada_familia/images/commons ./images/sagrada_familia
+create dirs for undistorted imgs
+mkdir -p ../Marigold/data/sfm/undistorted_images/tycho_brahe_johannes_kepler_prague
+mkdir -p ../Marigold/data/sfm/undistorted_images/eiffel_tower
+mkdir -p ../Marigold/data/sfm/undistorted_images/church_of_the_sacred_heart_prague
+mkdir -p ../Marigold/data/sfm/undistorted_images/apollon_de_cassel_louvre
+mkdir -p ../Marigold/data/sfm/undistorted_images/tgm_dejvice
+mkdir -p ../Marigold/data/sfm/undistorted_images/statue_of_liberty
+mkdir -p ../Marigold/data/sfm/undistorted_images/saint_wenceslaus_prague
+mkdir -p ../Marigold/data/sfm/undistorted_images/sydney_opera
+mkdir -p ../Marigold/data/sfm/undistorted_images/abraham_lincoln_lincoln_memorial
+mkdir -p ../Marigold/data/sfm/undistorted_images/statue_of_black_madonna_prague
+mkdir -p ../Marigold/data/sfm/undistorted_images/sacre_couer
+mkdir -p ../Marigold/data/sfm/undistorted_images/joseph_ii_prague
+mkdir -p ../Marigold/data/sfm/undistorted_images/saint_ignatius_church_prague
+mkdir -p ../Marigold/data/sfm/undistorted_images/singing_fountain_prague_castle
+mkdir -p ../Marigold/data/sfm/undistorted_images/data
+mkdir -p ../Marigold/data/sfm/undistorted_images/letohradek_kralovny_anny
+mkdir -p ../Marigold/data/sfm/undistorted_images/st_george_prague_castle
+mkdir -p ../Marigold/data/sfm/undistorted_images/arc_de_triomf_barcelona
+mkdir -p ../Marigold/data/sfm/undistorted_images/karluv_most
+mkdir -p ../Marigold/data/sfm/undistorted_images/prasna_brana
+mkdir -p ../Marigold/data/sfm/undistorted_images/notre_dame_paris
+mkdir -p ../Marigold/data/sfm/undistorted_images/sagrada_familia
+Processing scene tycho_brahe_johannes_kepler_prague ...
+Found reconstruction directories: ../datasets/megascenes/tycho_brahe_johannes_kepler_prague/reconstruct/colmap/0
+
+../datasets/megascenes/tycho_brahe_johannes_kepler_prague/reconstruct/colmap/0 => ../Marigold/data/sfm/data/tycho_brahe_johannes_kepler_prague/np
+rel out dir (np): data/tycho_brahe_johannes_kepler_prague/np
+out dir images: undistorted_images/tycho_brahe_johannes_kepler_prague
+will write to: ../Marigold/data/sfm/data/tycho_brahe_johannes_kepler_prague/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 15
+	num_cameras = 14
+	num_points3D = 1255
+	num_observations = 5314
+	mean_track_length = 4.23426
+	mean_observations_per_image = 354.267
+	mean_reprojection_error = 0.627523
+Number of images: 15
+Processing scene eiffel_tower ...
+Found reconstruction directories: 
+
+Processing scene church_of_the_sacred_heart_prague ...
+Found reconstruction directories: ../datasets/megascenes/church_of_the_sacred_heart_prague/reconstruct/colmap/0
+
+../datasets/megascenes/church_of_the_sacred_heart_prague/reconstruct/colmap/0 => ../Marigold/data/sfm/data/church_of_the_sacred_heart_prague/np
+rel out dir (np): data/church_of_the_sacred_heart_prague/np
+out dir images: undistorted_images/church_of_the_sacred_heart_prague
+will write to: ../Marigold/data/sfm/data/church_of_the_sacred_heart_prague/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 104
+	num_cameras = 76
+	num_points3D = 8254
+	num_observations = 38729
+	mean_track_length = 4.69215
+	mean_observations_per_image = 372.394
+	mean_reprojection_error = 0.805573
+Number of images: 104
+Processing scene apollon_de_cassel_louvre ...
+Found reconstruction directories: 
+
+Processing scene tgm_dejvice ...
+Found reconstruction directories: 
+
+Processing scene statue_of_liberty ...
+Found reconstruction directories: ../datasets/megascenes/statue_of_liberty/reconstruct/colmap/0
+../datasets/megascenes/statue_of_liberty/reconstruct/colmap/1
+../datasets/megascenes/statue_of_liberty/reconstruct/colmap/10
+../datasets/megascenes/statue_of_liberty/reconstruct/colmap/11
+../datasets/megascenes/statue_of_liberty/reconstruct/colmap/2
+../datasets/megascenes/statue_of_liberty/reconstruct/colmap/3
+../datasets/megascenes/statue_of_liberty/reconstruct/colmap/4
+../datasets/megascenes/statue_of_liberty/reconstruct/colmap/5
+../datasets/megascenes/statue_of_liberty/reconstruct/colmap/6
+../datasets/megascenes/statue_of_liberty/reconstruct/colmap/7
+../datasets/megascenes/statue_of_liberty/reconstruct/colmap/8
+../datasets/megascenes/statue_of_liberty/reconstruct/colmap/9
+
+../datasets/megascenes/statue_of_liberty/reconstruct/colmap/0 => ../Marigold/data/sfm/data/statue_of_liberty/np
+rel out dir (np): data/statue_of_liberty/np
+out dir images: undistorted_images/statue_of_liberty
+will write to: ../Marigold/data/sfm/data/statue_of_liberty/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 1920
+	num_cameras = 957
+	num_points3D = 223819
+	num_observations = 2685231
+	mean_track_length = 11.9973
+	mean_observations_per_image = 1398.56
+	mean_reprojection_error = 0.500755
+Number of images: 1920
+../datasets/megascenes/statue_of_liberty/reconstruct/colmap/1 => ../Marigold/data/sfm/data/statue_of_liberty/np
+rel out dir (np): data/statue_of_liberty/np
+out dir images: undistorted_images/statue_of_liberty
+will write to: ../Marigold/data/sfm/data/statue_of_liberty/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 11
+	num_cameras = 5
+	num_points3D = 715
+	num_observations = 5685
+	mean_track_length = 7.95105
+	mean_observations_per_image = 516.818
+	mean_reprojection_error = 0.531965
+Number of images: 11
+../datasets/megascenes/statue_of_liberty/reconstruct/colmap/10 => ../Marigold/data/sfm/data/statue_of_liberty/np
+rel out dir (np): data/statue_of_liberty/np
+out dir images: undistorted_images/statue_of_liberty
+will write to: ../Marigold/data/sfm/data/statue_of_liberty/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 20
+	num_cameras = 7
+	num_points3D = 7987
+	num_observations = 53857
+	mean_track_length = 6.74308
+	mean_observations_per_image = 2692.85
+	mean_reprojection_error = 0.276719
+Number of images: 20
+../datasets/megascenes/statue_of_liberty/reconstruct/colmap/11 => ../Marigold/data/sfm/data/statue_of_liberty/np
+rel out dir (np): data/statue_of_liberty/np
+out dir images: undistorted_images/statue_of_liberty
+will write to: ../Marigold/data/sfm/data/statue_of_liberty/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 14
+	num_cameras = 6
+	num_points3D = 736
+	num_observations = 4357
+	mean_track_length = 5.91984
+	mean_observations_per_image = 311.214
+	mean_reprojection_error = 0.389698
+Number of images: 14
+../datasets/megascenes/statue_of_liberty/reconstruct/colmap/2 => ../Marigold/data/sfm/data/statue_of_liberty/np
+rel out dir (np): data/statue_of_liberty/np
+out dir images: undistorted_images/statue_of_liberty
+will write to: ../Marigold/data/sfm/data/statue_of_liberty/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 20
+	num_cameras = 12
+	num_points3D = 7329
+	num_observations = 54897
+	mean_track_length = 7.49038
+	mean_observations_per_image = 2744.85
+	mean_reprojection_error = 0.57847
+Number of images: 20
+../datasets/megascenes/statue_of_liberty/reconstruct/colmap/3 => ../Marigold/data/sfm/data/statue_of_liberty/np
+rel out dir (np): data/statue_of_liberty/np
+out dir images: undistorted_images/statue_of_liberty
+will write to: ../Marigold/data/sfm/data/statue_of_liberty/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 20
+	num_cameras = 11
+	num_points3D = 4704
+	num_observations = 36605
+	mean_track_length = 7.78168
+	mean_observations_per_image = 1830.25
+	mean_reprojection_error = 0.419977
+Number of images: 20
+../datasets/megascenes/statue_of_liberty/reconstruct/colmap/4 => ../Marigold/data/sfm/data/statue_of_liberty/np
+rel out dir (np): data/statue_of_liberty/np
+out dir images: undistorted_images/statue_of_liberty
+will write to: ../Marigold/data/sfm/data/statue_of_liberty/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 20
+	num_cameras = 11
+	num_points3D = 6276
+	num_observations = 47809
+	mean_track_length = 7.61775
+	mean_observations_per_image = 2390.45
+	mean_reprojection_error = 0.517429
+Number of images: 20
+../datasets/megascenes/statue_of_liberty/reconstruct/colmap/5 => ../Marigold/data/sfm/data/statue_of_liberty/np
+rel out dir (np): data/statue_of_liberty/np
+out dir images: undistorted_images/statue_of_liberty
+will write to: ../Marigold/data/sfm/data/statue_of_liberty/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 22
+	num_cameras = 12
+	num_points3D = 8629
+	num_observations = 61453
+	mean_track_length = 7.12168
+	mean_observations_per_image = 2793.32
+	mean_reprojection_error = 0.497269
+Number of images: 22
+../datasets/megascenes/statue_of_liberty/reconstruct/colmap/6 => ../Marigold/data/sfm/data/statue_of_liberty/np
+rel out dir (np): data/statue_of_liberty/np
+out dir images: undistorted_images/statue_of_liberty
+will write to: ../Marigold/data/sfm/data/statue_of_liberty/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 72
+	num_cameras = 33
+	num_points3D = 5279
+	num_observations = 35842
+	mean_track_length = 6.78954
+	mean_observations_per_image = 497.806
+	mean_reprojection_error = 0.409191
+Number of images: 72
+../datasets/megascenes/statue_of_liberty/reconstruct/colmap/7 => ../Marigold/data/sfm/data/statue_of_liberty/np
+rel out dir (np): data/statue_of_liberty/np
+out dir images: undistorted_images/statue_of_liberty
+will write to: ../Marigold/data/sfm/data/statue_of_liberty/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 19
+	num_cameras = 12
+	num_points3D = 367
+	num_observations = 3219
+	mean_track_length = 8.77112
+	mean_observations_per_image = 169.421
+	mean_reprojection_error = 0.50561
+Number of images: 19
+../datasets/megascenes/statue_of_liberty/reconstruct/colmap/8 => ../Marigold/data/sfm/data/statue_of_liberty/np
+rel out dir (np): data/statue_of_liberty/np
+out dir images: undistorted_images/statue_of_liberty
+will write to: ../Marigold/data/sfm/data/statue_of_liberty/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 20
+	num_cameras = 9
+	num_points3D = 5126
+	num_observations = 34511
+	mean_track_length = 6.73254
+	mean_observations_per_image = 1725.55
+	mean_reprojection_error = 0.360026
+Number of images: 20
+../datasets/megascenes/statue_of_liberty/reconstruct/colmap/9 => ../Marigold/data/sfm/data/statue_of_liberty/np
+rel out dir (np): data/statue_of_liberty/np
+out dir images: undistorted_images/statue_of_liberty
+will write to: ../Marigold/data/sfm/data/statue_of_liberty/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 19
+	num_cameras = 10
+	num_points3D = 1046
+	num_observations = 5434
+	mean_track_length = 5.19503
+	mean_observations_per_image = 286
+	mean_reprojection_error = 0.701452
+Number of images: 19
+WARNING - no uv points, skipping image
+WARNING - no uv points, skipping image
+WARNING - no uv points, skipping image
+WARNING - no uv points, skipping image
+WARNING - no uv points, skipping image
+WARNING - no uv points, skipping image
+Processing scene saint_wenceslaus_prague ...
+Found reconstruction directories: 
+
+Processing scene sydney_opera ...
+Found reconstruction directories: ../datasets/megascenes/sydney_opera/reconstruct/colmap/0
+../datasets/megascenes/sydney_opera/reconstruct/colmap/1
+../datasets/megascenes/sydney_opera/reconstruct/colmap/2
+../datasets/megascenes/sydney_opera/reconstruct/colmap/3
+../datasets/megascenes/sydney_opera/reconstruct/colmap/4
+../datasets/megascenes/sydney_opera/reconstruct/colmap/5
+../datasets/megascenes/sydney_opera/reconstruct/colmap/6
+
+../datasets/megascenes/sydney_opera/reconstruct/colmap/0 => ../Marigold/data/sfm/data/sydney_opera/np
+rel out dir (np): data/sydney_opera/np
+out dir images: undistorted_images/sydney_opera
+will write to: ../Marigold/data/sfm/data/sydney_opera/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 12
+	num_cameras = 3
+	num_points3D = 449
+	num_observations = 4389
+	mean_track_length = 9.77506
+	mean_observations_per_image = 365.75
+	mean_reprojection_error = 0.248892
+Number of images: 12
+../datasets/megascenes/sydney_opera/reconstruct/colmap/1 => ../Marigold/data/sfm/data/sydney_opera/np
+rel out dir (np): data/sydney_opera/np
+out dir images: undistorted_images/sydney_opera
+will write to: ../Marigold/data/sfm/data/sydney_opera/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 10
+	num_cameras = 8
+	num_points3D = 6
+	num_observations = 21
+	mean_track_length = 3.5
+	mean_observations_per_image = 2.1
+	mean_reprojection_error = 0.266712
+Number of images: 10
+WARNING - no uv points, skipping image
+WARNING - no uv points, skipping image
+WARNING: ambiguity (len(uv) == 2)
+WARNING - no uv points, skipping image
+WARNING - no uv points, skipping image
+WARNING - no uv points, skipping image
+WARNING - no uv points, skipping image
+../datasets/megascenes/sydney_opera/reconstruct/colmap/2 => ../Marigold/data/sfm/data/sydney_opera/np
+rel out dir (np): data/sydney_opera/np
+out dir images: undistorted_images/sydney_opera
+will write to: ../Marigold/data/sfm/data/sydney_opera/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 103
+	num_cameras = 84
+	num_points3D = 5922
+	num_observations = 35852
+	mean_track_length = 6.05404
+	mean_observations_per_image = 348.078
+	mean_reprojection_error = 0.718684
+Number of images: 103
+../datasets/megascenes/sydney_opera/reconstruct/colmap/3 => ../Marigold/data/sfm/data/sydney_opera/np
+rel out dir (np): data/sydney_opera/np
+out dir images: undistorted_images/sydney_opera
+will write to: ../Marigold/data/sfm/data/sydney_opera/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 361
+	num_cameras = 284
+	num_points3D = 8810
+	num_observations = 54233
+	mean_track_length = 6.15585
+	mean_observations_per_image = 150.23
+	mean_reprojection_error = 0.840291
+Number of images: 361
+../datasets/megascenes/sydney_opera/reconstruct/colmap/4 => ../Marigold/data/sfm/data/sydney_opera/np
+rel out dir (np): data/sydney_opera/np
+out dir images: undistorted_images/sydney_opera
+will write to: ../Marigold/data/sfm/data/sydney_opera/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 14
+	num_cameras = 14
+	num_points3D = 395
+	num_observations = 1893
+	mean_track_length = 4.79241
+	mean_observations_per_image = 135.214
+	mean_reprojection_error = 0.957199
+Number of images: 14
+../datasets/megascenes/sydney_opera/reconstruct/colmap/5 => ../Marigold/data/sfm/data/sydney_opera/np
+rel out dir (np): data/sydney_opera/np
+out dir images: undistorted_images/sydney_opera
+will write to: ../Marigold/data/sfm/data/sydney_opera/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 98
+	num_cameras = 85
+	num_points3D = 2139
+	num_observations = 16924
+	mean_track_length = 7.91211
+	mean_observations_per_image = 172.694
+	mean_reprojection_error = 0.893002
+Number of images: 98
+../datasets/megascenes/sydney_opera/reconstruct/colmap/6 => ../Marigold/data/sfm/data/sydney_opera/np
+rel out dir (np): data/sydney_opera/np
+out dir images: undistorted_images/sydney_opera
+will write to: ../Marigold/data/sfm/data/sydney_opera/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 25
+	num_cameras = 22
+	num_points3D = 2265
+	num_observations = 10002
+	mean_track_length = 4.41589
+	mean_observations_per_image = 400.08
+	mean_reprojection_error = 0.960028
+Number of images: 25
+Processing scene abraham_lincoln_lincoln_memorial ...
+Found reconstruction directories: ../datasets/megascenes/abraham_lincoln_lincoln_memorial/reconstruct/colmap/0
+
+../datasets/megascenes/abraham_lincoln_lincoln_memorial/reconstruct/colmap/0 => ../Marigold/data/sfm/data/abraham_lincoln_lincoln_memorial/np
+rel out dir (np): data/abraham_lincoln_lincoln_memorial/np
+out dir images: undistorted_images/abraham_lincoln_lincoln_memorial
+will write to: ../Marigold/data/sfm/data/abraham_lincoln_lincoln_memorial/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 423
+	num_cameras = 403
+	num_points3D = 33730
+	num_observations = 315154
+	mean_track_length = 9.34343
+	mean_observations_per_image = 745.045
+	mean_reprojection_error = 1.03232
+Number of images: 423
+Processing scene statue_of_black_madonna_prague ...
+Found reconstruction directories: 
+
+Processing scene sacre_couer ...
+Found reconstruction directories: ../datasets/megascenes/sacre_couer/reconstruct/colmap/0
+
+../datasets/megascenes/sacre_couer/reconstruct/colmap/0 => ../Marigold/data/sfm/data/sacre_couer/np
+rel out dir (np): data/sacre_couer/np
+out dir images: undistorted_images/sacre_couer
+will write to: ../Marigold/data/sfm/data/sacre_couer/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 14
+	num_cameras = 1
+	num_points3D = 3406
+	num_observations = 14784
+	mean_track_length = 4.34058
+	mean_observations_per_image = 1056
+	mean_reprojection_error = 1.11228
+Number of images: 14
+Processing scene joseph_ii_prague ...
+Found reconstruction directories: 
+
+Processing scene saint_ignatius_church_prague ...
+Found reconstruction directories: ../datasets/megascenes/saint_ignatius_church_prague/reconstruct/colmap/0
+
+../datasets/megascenes/saint_ignatius_church_prague/reconstruct/colmap/0 => ../Marigold/data/sfm/data/saint_ignatius_church_prague/np
+rel out dir (np): data/saint_ignatius_church_prague/np
+out dir images: undistorted_images/saint_ignatius_church_prague
+will write to: ../Marigold/data/sfm/data/saint_ignatius_church_prague/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 51
+	num_cameras = 43
+	num_points3D = 9234
+	num_observations = 47721
+	mean_track_length = 5.16797
+	mean_observations_per_image = 935.706
+	mean_reprojection_error = 0.782866
+Number of images: 51
+Processing scene singing_fountain_prague_castle ...
+Found reconstruction directories: 
+
+Processing scene data ...
+Found reconstruction directories: 
+
+Processing scene letohradek_kralovny_anny ...
+Found reconstruction directories: ../datasets/megascenes/letohradek_kralovny_anny/reconstruct/colmap/0
+
+../datasets/megascenes/letohradek_kralovny_anny/reconstruct/colmap/0 => ../Marigold/data/sfm/data/letohradek_kralovny_anny/np
+rel out dir (np): data/letohradek_kralovny_anny/np
+out dir images: undistorted_images/letohradek_kralovny_anny
+will write to: ../Marigold/data/sfm/data/letohradek_kralovny_anny/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 29
+	num_cameras = 27
+	num_points3D = 4066
+	num_observations = 15053
+	mean_track_length = 3.70216
+	mean_observations_per_image = 519.069
+	mean_reprojection_error = 0.771831
+Number of images: 29
+Processing scene st_george_prague_castle ...
+Found reconstruction directories: 
+
+Processing scene arc_de_triomf_barcelona ...
+Found reconstruction directories: ../datasets/megascenes/arc_de_triomf_barcelona/reconstruct/colmap/0
+
+../datasets/megascenes/arc_de_triomf_barcelona/reconstruct/colmap/0 => ../Marigold/data/sfm/data/arc_de_triomf_barcelona/np
+rel out dir (np): data/arc_de_triomf_barcelona/np
+out dir images: undistorted_images/arc_de_triomf_barcelona
+will write to: ../Marigold/data/sfm/data/arc_de_triomf_barcelona/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 227
+	num_cameras = 201
+	num_points3D = 33620
+	num_observations = 218829
+	mean_track_length = 6.50889
+	mean_observations_per_image = 964.004
+	mean_reprojection_error = 0.777498
+Number of images: 227
+Processing scene karluv_most ...
+Found reconstruction directories: ../datasets/megascenes/karluv_most/reconstruct/colmap/0
+../datasets/megascenes/karluv_most/reconstruct/colmap/1
+../datasets/megascenes/karluv_most/reconstruct/colmap/10
+../datasets/megascenes/karluv_most/reconstruct/colmap/11
+../datasets/megascenes/karluv_most/reconstruct/colmap/12
+../datasets/megascenes/karluv_most/reconstruct/colmap/13
+../datasets/megascenes/karluv_most/reconstruct/colmap/14
+../datasets/megascenes/karluv_most/reconstruct/colmap/15
+../datasets/megascenes/karluv_most/reconstruct/colmap/16
+../datasets/megascenes/karluv_most/reconstruct/colmap/17
+../datasets/megascenes/karluv_most/reconstruct/colmap/2
+../datasets/megascenes/karluv_most/reconstruct/colmap/3
+../datasets/megascenes/karluv_most/reconstruct/colmap/4
+../datasets/megascenes/karluv_most/reconstruct/colmap/5
+../datasets/megascenes/karluv_most/reconstruct/colmap/6
+../datasets/megascenes/karluv_most/reconstruct/colmap/7
+../datasets/megascenes/karluv_most/reconstruct/colmap/8
+../datasets/megascenes/karluv_most/reconstruct/colmap/9
+
+../datasets/megascenes/karluv_most/reconstruct/colmap/0 => ../Marigold/data/sfm/data/karluv_most/np
+rel out dir (np): data/karluv_most/np
+out dir images: undistorted_images/karluv_most
+will write to: ../Marigold/data/sfm/data/karluv_most/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 2323
+	num_cameras = 1572
+	num_points3D = 328609
+	num_observations = 2318699
+	mean_track_length = 7.0561
+	mean_observations_per_image = 998.149
+	mean_reprojection_error = 0.663228
+Number of images: 2323
+../datasets/megascenes/karluv_most/reconstruct/colmap/1 => ../Marigold/data/sfm/data/karluv_most/np
+rel out dir (np): data/karluv_most/np
+out dir images: undistorted_images/karluv_most
+will write to: ../Marigold/data/sfm/data/karluv_most/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 23
+	num_cameras = 13
+	num_points3D = 3115
+	num_observations = 17295
+	mean_track_length = 5.55217
+	mean_observations_per_image = 751.957
+	mean_reprojection_error = 0.416471
+Number of images: 23
+../datasets/megascenes/karluv_most/reconstruct/colmap/10 => ../Marigold/data/sfm/data/karluv_most/np
+rel out dir (np): data/karluv_most/np
+out dir images: undistorted_images/karluv_most
+will write to: ../Marigold/data/sfm/data/karluv_most/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 10
+	num_cameras = 9
+	num_points3D = 545
+	num_observations = 1660
+	mean_track_length = 3.04587
+	mean_observations_per_image = 166
+	mean_reprojection_error = 0.70174
+Number of images: 10
+../datasets/megascenes/karluv_most/reconstruct/colmap/11 => ../Marigold/data/sfm/data/karluv_most/np
+rel out dir (np): data/karluv_most/np
+out dir images: undistorted_images/karluv_most
+will write to: ../Marigold/data/sfm/data/karluv_most/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 10
+	num_cameras = 10
+	num_points3D = 2729
+	num_observations = 10511
+	mean_track_length = 3.85159
+	mean_observations_per_image = 1051.1
+	mean_reprojection_error = 0.472073
+Number of images: 10
+../datasets/megascenes/karluv_most/reconstruct/colmap/12 => ../Marigold/data/sfm/data/karluv_most/np
+rel out dir (np): data/karluv_most/np
+out dir images: undistorted_images/karluv_most
+will write to: ../Marigold/data/sfm/data/karluv_most/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 20
+	num_cameras = 20
+	num_points3D = 9992
+	num_observations = 41708
+	mean_track_length = 4.17414
+	mean_observations_per_image = 2085.4
+	mean_reprojection_error = 0.500853
+Number of images: 20
+../datasets/megascenes/karluv_most/reconstruct/colmap/13 => ../Marigold/data/sfm/data/karluv_most/np
+rel out dir (np): data/karluv_most/np
+out dir images: undistorted_images/karluv_most
+will write to: ../Marigold/data/sfm/data/karluv_most/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 25
+	num_cameras = 24
+	num_points3D = 4216
+	num_observations = 15614
+	mean_track_length = 3.70351
+	mean_observations_per_image = 624.56
+	mean_reprojection_error = 0.711166
+Number of images: 25
+../datasets/megascenes/karluv_most/reconstruct/colmap/14 => ../Marigold/data/sfm/data/karluv_most/np
+rel out dir (np): data/karluv_most/np
+out dir images: undistorted_images/karluv_most
+will write to: ../Marigold/data/sfm/data/karluv_most/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 19
+	num_cameras = 19
+	num_points3D = 3881
+	num_observations = 14938
+	mean_track_length = 3.84901
+	mean_observations_per_image = 786.211
+	mean_reprojection_error = 0.841483
+Number of images: 19
+../datasets/megascenes/karluv_most/reconstruct/colmap/15 => ../Marigold/data/sfm/data/karluv_most/np
+rel out dir (np): data/karluv_most/np
+out dir images: undistorted_images/karluv_most
+will write to: ../Marigold/data/sfm/data/karluv_most/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 13
+	num_cameras = 13
+	num_points3D = 805
+	num_observations = 2816
+	mean_track_length = 3.49814
+	mean_observations_per_image = 216.615
+	mean_reprojection_error = 0.560203
+Number of images: 13
+../datasets/megascenes/karluv_most/reconstruct/colmap/16 => ../Marigold/data/sfm/data/karluv_most/np
+rel out dir (np): data/karluv_most/np
+out dir images: undistorted_images/karluv_most
+will write to: ../Marigold/data/sfm/data/karluv_most/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 17
+	num_cameras = 15
+	num_points3D = 2762
+	num_observations = 9843
+	mean_track_length = 3.56372
+	mean_observations_per_image = 579
+	mean_reprojection_error = 0.881775
+Number of images: 17
+../datasets/megascenes/karluv_most/reconstruct/colmap/17 => ../Marigold/data/sfm/data/karluv_most/np
+rel out dir (np): data/karluv_most/np
+out dir images: undistorted_images/karluv_most
+will write to: ../Marigold/data/sfm/data/karluv_most/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 22
+	num_cameras = 19
+	num_points3D = 3240
+	num_observations = 10561
+	mean_track_length = 3.25957
+	mean_observations_per_image = 480.045
+	mean_reprojection_error = 1.02099
+Number of images: 22
+../datasets/megascenes/karluv_most/reconstruct/colmap/2 => ../Marigold/data/sfm/data/karluv_most/np
+rel out dir (np): data/karluv_most/np
+out dir images: undistorted_images/karluv_most
+will write to: ../Marigold/data/sfm/data/karluv_most/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 20
+	num_cameras = 16
+	num_points3D = 7773
+	num_observations = 46225
+	mean_track_length = 5.94687
+	mean_observations_per_image = 2311.25
+	mean_reprojection_error = 0.57348
+Number of images: 20
+../datasets/megascenes/karluv_most/reconstruct/colmap/3 => ../Marigold/data/sfm/data/karluv_most/np
+rel out dir (np): data/karluv_most/np
+out dir images: undistorted_images/karluv_most
+will write to: ../Marigold/data/sfm/data/karluv_most/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 21
+	num_cameras = 21
+	num_points3D = 10343
+	num_observations = 44289
+	mean_track_length = 4.28203
+	mean_observations_per_image = 2109
+	mean_reprojection_error = 0.557083
+Number of images: 21
+../datasets/megascenes/karluv_most/reconstruct/colmap/4 => ../Marigold/data/sfm/data/karluv_most/np
+rel out dir (np): data/karluv_most/np
+out dir images: undistorted_images/karluv_most
+will write to: ../Marigold/data/sfm/data/karluv_most/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 20
+	num_cameras = 20
+	num_points3D = 10314
+	num_observations = 43742
+	mean_track_length = 4.24103
+	mean_observations_per_image = 2187.1
+	mean_reprojection_error = 0.554223
+Number of images: 20
+../datasets/megascenes/karluv_most/reconstruct/colmap/5 => ../Marigold/data/sfm/data/karluv_most/np
+rel out dir (np): data/karluv_most/np
+out dir images: undistorted_images/karluv_most
+will write to: ../Marigold/data/sfm/data/karluv_most/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 22
+	num_cameras = 17
+	num_points3D = 4736
+	num_observations = 36064
+	mean_track_length = 7.61486
+	mean_observations_per_image = 1639.27
+	mean_reprojection_error = 0.717411
+Number of images: 22
+../datasets/megascenes/karluv_most/reconstruct/colmap/6 => ../Marigold/data/sfm/data/karluv_most/np
+rel out dir (np): data/karluv_most/np
+out dir images: undistorted_images/karluv_most
+will write to: ../Marigold/data/sfm/data/karluv_most/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 20
+	num_cameras = 19
+	num_points3D = 9036
+	num_observations = 39833
+	mean_track_length = 4.40826
+	mean_observations_per_image = 1991.65
+	mean_reprojection_error = 0.529531
+Number of images: 20
+../datasets/megascenes/karluv_most/reconstruct/colmap/7 => ../Marigold/data/sfm/data/karluv_most/np
+rel out dir (np): data/karluv_most/np
+out dir images: undistorted_images/karluv_most
+will write to: ../Marigold/data/sfm/data/karluv_most/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 20
+	num_cameras = 19
+	num_points3D = 8975
+	num_observations = 39942
+	mean_track_length = 4.45036
+	mean_observations_per_image = 1997.1
+	mean_reprojection_error = 0.524423
+Number of images: 20
+../datasets/megascenes/karluv_most/reconstruct/colmap/8 => ../Marigold/data/sfm/data/karluv_most/np
+rel out dir (np): data/karluv_most/np
+out dir images: undistorted_images/karluv_most
+will write to: ../Marigold/data/sfm/data/karluv_most/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 18
+	num_cameras = 15
+	num_points3D = 3490
+	num_observations = 13601
+	mean_track_length = 3.89713
+	mean_observations_per_image = 755.611
+	mean_reprojection_error = 0.517342
+Number of images: 18
+../datasets/megascenes/karluv_most/reconstruct/colmap/9 => ../Marigold/data/sfm/data/karluv_most/np
+rel out dir (np): data/karluv_most/np
+out dir images: undistorted_images/karluv_most
+will write to: ../Marigold/data/sfm/data/karluv_most/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 20
+	num_cameras = 20
+	num_points3D = 9994
+	num_observations = 41747
+	mean_track_length = 4.17721
+	mean_observations_per_image = 2087.35
+	mean_reprojection_error = 0.501313
+Number of images: 20
+Processing scene prasna_brana ...
+Found reconstruction directories: ../datasets/megascenes/prasna_brana/reconstruct/colmap/0
+../datasets/megascenes/prasna_brana/reconstruct/colmap/1
+../datasets/megascenes/prasna_brana/reconstruct/colmap/2
+../datasets/megascenes/prasna_brana/reconstruct/colmap/3
+../datasets/megascenes/prasna_brana/reconstruct/colmap/4
+
+../datasets/megascenes/prasna_brana/reconstruct/colmap/0 => ../Marigold/data/sfm/data/prasna_brana/np
+rel out dir (np): data/prasna_brana/np
+out dir images: undistorted_images/prasna_brana
+will write to: ../Marigold/data/sfm/data/prasna_brana/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 296
+	num_cameras = 205
+	num_points3D = 94711
+	num_observations = 706555
+	mean_track_length = 7.46012
+	mean_observations_per_image = 2387.01
+	mean_reprojection_error = 0.809275
+Number of images: 296
+../datasets/megascenes/prasna_brana/reconstruct/colmap/1 => ../Marigold/data/sfm/data/prasna_brana/np
+rel out dir (np): data/prasna_brana/np
+out dir images: undistorted_images/prasna_brana
+will write to: ../Marigold/data/sfm/data/prasna_brana/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 21
+	num_cameras = 18
+	num_points3D = 15451
+	num_observations = 69638
+	mean_track_length = 4.50702
+	mean_observations_per_image = 3316.1
+	mean_reprojection_error = 0.55977
+Number of images: 21
+../datasets/megascenes/prasna_brana/reconstruct/colmap/2 => ../Marigold/data/sfm/data/prasna_brana/np
+rel out dir (np): data/prasna_brana/np
+out dir images: undistorted_images/prasna_brana
+will write to: ../Marigold/data/sfm/data/prasna_brana/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 30
+	num_cameras = 24
+	num_points3D = 3740
+	num_observations = 18867
+	mean_track_length = 5.04465
+	mean_observations_per_image = 628.9
+	mean_reprojection_error = 0.528
+Number of images: 30
+../datasets/megascenes/prasna_brana/reconstruct/colmap/3 => ../Marigold/data/sfm/data/prasna_brana/np
+rel out dir (np): data/prasna_brana/np
+out dir images: undistorted_images/prasna_brana
+will write to: ../Marigold/data/sfm/data/prasna_brana/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 21
+	num_cameras = 18
+	num_points3D = 15627
+	num_observations = 71335
+	mean_track_length = 4.56486
+	mean_observations_per_image = 3396.9
+	mean_reprojection_error = 0.677261
+Number of images: 21
+../datasets/megascenes/prasna_brana/reconstruct/colmap/4 => ../Marigold/data/sfm/data/prasna_brana/np
+rel out dir (np): data/prasna_brana/np
+out dir images: undistorted_images/prasna_brana
+will write to: ../Marigold/data/sfm/data/prasna_brana/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 20
+	num_cameras = 18
+	num_points3D = 15606
+	num_observations = 69399
+	mean_track_length = 4.44694
+	mean_observations_per_image = 3469.95
+	mean_reprojection_error = 0.5923
+Number of images: 20
+Processing scene notre_dame_paris ...
+Found reconstruction directories: ../datasets/megascenes/notre_dame_paris/reconstruct/colmap/0
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/1
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/10
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/11
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/12
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/13
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/14
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/15
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/16
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/17
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/18
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/19
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/2
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/20
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/21
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/22
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/23
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/24
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/25
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/26
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/27
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/28
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/29
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/3
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/30
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/31
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/32
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/33
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/34
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/35
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/36
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/37
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/38
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/39
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/4
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/40
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/41
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/42
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/5
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/6
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/7
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/8
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/9
+
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/0 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 5115
+	num_cameras = 2745
+	num_points3D = 887282
+	num_observations = 10816280
+	mean_track_length = 12.1904
+	mean_observations_per_image = 2114.62
+	mean_reprojection_error = 0.808799
+Number of images: 5115
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/1 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 21
+	num_cameras = 11
+	num_points3D = 15348
+	num_observations = 90841
+	mean_track_length = 5.91875
+	mean_observations_per_image = 4325.76
+	mean_reprojection_error = 0.715891
+Number of images: 21
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/10 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 55
+	num_cameras = 22
+	num_points3D = 18367
+	num_observations = 141377
+	mean_track_length = 7.69734
+	mean_observations_per_image = 2570.49
+	mean_reprojection_error = 0.697547
+Number of images: 55
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/11 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 98
+	num_cameras = 37
+	num_points3D = 14939
+	num_observations = 116169
+	mean_track_length = 7.77622
+	mean_observations_per_image = 1185.4
+	mean_reprojection_error = 0.983394
+Number of images: 98
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/12 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 45
+	num_cameras = 16
+	num_points3D = 10743
+	num_observations = 64197
+	mean_track_length = 5.97571
+	mean_observations_per_image = 1426.6
+	mean_reprojection_error = 0.543259
+Number of images: 45
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/13 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 104
+	num_cameras = 66
+	num_points3D = 32964
+	num_observations = 167230
+	mean_track_length = 5.07311
+	mean_observations_per_image = 1607.98
+	mean_reprojection_error = 0.677327
+Number of images: 104
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/14 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 20
+	num_cameras = 13
+	num_points3D = 13510
+	num_observations = 86465
+	mean_track_length = 6.40007
+	mean_observations_per_image = 4323.25
+	mean_reprojection_error = 0.541871
+Number of images: 20
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/15 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 20
+	num_cameras = 17
+	num_points3D = 17824
+	num_observations = 95439
+	mean_track_length = 5.35452
+	mean_observations_per_image = 4771.95
+	mean_reprojection_error = 0.672568
+Number of images: 20
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/16 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 18
+	num_cameras = 6
+	num_points3D = 4125
+	num_observations = 43130
+	mean_track_length = 10.4558
+	mean_observations_per_image = 2396.11
+	mean_reprojection_error = 0.569385
+Number of images: 18
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/17 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 22
+	num_cameras = 15
+	num_points3D = 10916
+	num_observations = 64670
+	mean_track_length = 5.92433
+	mean_observations_per_image = 2939.55
+	mean_reprojection_error = 0.686108
+Number of images: 22
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/18 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 19
+	num_cameras = 11
+	num_points3D = 5481
+	num_observations = 48470
+	mean_track_length = 8.84328
+	mean_observations_per_image = 2551.05
+	mean_reprojection_error = 0.464085
+Number of images: 19
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/19 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 368
+	num_cameras = 178
+	num_points3D = 41627
+	num_observations = 284141
+	mean_track_length = 6.82588
+	mean_observations_per_image = 772.122
+	mean_reprojection_error = 0.729872
+Number of images: 368
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/2 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 1079
+	num_cameras = 531
+	num_points3D = 219789
+	num_observations = 2100314
+	mean_track_length = 9.55605
+	mean_observations_per_image = 1946.54
+	mean_reprojection_error = 0.770109
+Number of images: 1079
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/20 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 13
+	num_cameras = 6
+	num_points3D = 166
+	num_observations = 840
+	mean_track_length = 5.06024
+	mean_observations_per_image = 64.6154
+	mean_reprojection_error = 0.323138
+Number of images: 13
+WARNING - no uv points, skipping image
+WARNING - no uv points, skipping image
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/21 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 16
+	num_cameras = 12
+	num_points3D = 9729
+	num_observations = 45154
+	mean_track_length = 4.64118
+	mean_observations_per_image = 2822.12
+	mean_reprojection_error = 0.778179
+Number of images: 16
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/22 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 14
+	num_cameras = 11
+	num_points3D = 7564
+	num_observations = 35823
+	mean_track_length = 4.73599
+	mean_observations_per_image = 2558.79
+	mean_reprojection_error = 0.797418
+Number of images: 14
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/23 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 14
+	num_cameras = 11
+	num_points3D = 7476
+	num_observations = 35131
+	mean_track_length = 4.69917
+	mean_observations_per_image = 2509.36
+	mean_reprojection_error = 0.801445
+Number of images: 14
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/24 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 14
+	num_cameras = 11
+	num_points3D = 8169
+	num_observations = 37148
+	mean_track_length = 4.54744
+	mean_observations_per_image = 2653.43
+	mean_reprojection_error = 0.790831
+Number of images: 14
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/25 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 13
+	num_cameras = 9
+	num_points3D = 6201
+	num_observations = 35140
+	mean_track_length = 5.66683
+	mean_observations_per_image = 2703.08
+	mean_reprojection_error = 0.583996
+Number of images: 13
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/26 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 11
+	num_cameras = 5
+	num_points3D = 1944
+	num_observations = 9770
+	mean_track_length = 5.02572
+	mean_observations_per_image = 888.182
+	mean_reprojection_error = 0.783195
+Number of images: 11
+WARNING - no uv points, skipping image
+WARNING - no uv points, skipping image
+WARNING - no uv points, skipping image
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/27 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 10
+	num_cameras = 3
+	num_points3D = 1340
+	num_observations = 8386
+	mean_track_length = 6.25821
+	mean_observations_per_image = 838.6
+	mean_reprojection_error = 0.576134
+Number of images: 10
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/28 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 20
+	num_cameras = 10
+	num_points3D = 7000
+	num_observations = 42365
+	mean_track_length = 6.05214
+	mean_observations_per_image = 2118.25
+	mean_reprojection_error = 0.571478
+Number of images: 20
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/29 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 30
+	num_cameras = 16
+	num_points3D = 15440
+	num_observations = 69749
+	mean_track_length = 4.51742
+	mean_observations_per_image = 2324.97
+	mean_reprojection_error = 0.749832
+Number of images: 30
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/3 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 32
+	num_cameras = 30
+	num_points3D = 27641
+	num_observations = 253521
+	mean_track_length = 9.17192
+	mean_observations_per_image = 7922.53
+	mean_reprojection_error = 0.765024
+Number of images: 32
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/30 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 13
+	num_cameras = 6
+	num_points3D = 1771
+	num_observations = 8478
+	mean_track_length = 4.78713
+	mean_observations_per_image = 652.154
+	mean_reprojection_error = 0.745723
+Number of images: 13
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/31 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 23
+	num_cameras = 6
+	num_points3D = 3081
+	num_observations = 21674
+	mean_track_length = 7.03473
+	mean_observations_per_image = 942.348
+	mean_reprojection_error = 0.512203
+Number of images: 23
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/32 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 85
+	num_cameras = 59
+	num_points3D = 40973
+	num_observations = 161076
+	mean_track_length = 3.93127
+	mean_observations_per_image = 1895.01
+	mean_reprojection_error = 0.750292
+Number of images: 85
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/33 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 14
+	num_cameras = 10
+	num_points3D = 6992
+	num_observations = 28796
+	mean_track_length = 4.11842
+	mean_observations_per_image = 2056.86
+	mean_reprojection_error = 0.39573
+Number of images: 14
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/34 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 17
+	num_cameras = 7
+	num_points3D = 794
+	num_observations = 3949
+	mean_track_length = 4.97355
+	mean_observations_per_image = 232.294
+	mean_reprojection_error = 0.550549
+Number of images: 17
+WARNING: ambiguity (len(uv) == 2)
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/35 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 23
+	num_cameras = 11
+	num_points3D = 8495
+	num_observations = 35214
+	mean_track_length = 4.14526
+	mean_observations_per_image = 1531.04
+	mean_reprojection_error = 0.564343
+Number of images: 23
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/36 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 22
+	num_cameras = 19
+	num_points3D = 17306
+	num_observations = 85445
+	mean_track_length = 4.9373
+	mean_observations_per_image = 3883.86
+	mean_reprojection_error = 0.887826
+Number of images: 22
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/37 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 10
+	num_cameras = 7
+	num_points3D = 3158
+	num_observations = 15114
+	mean_track_length = 4.78594
+	mean_observations_per_image = 1511.4
+	mean_reprojection_error = 0.611904
+Number of images: 10
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/38 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 20
+	num_cameras = 8
+	num_points3D = 5241
+	num_observations = 35383
+	mean_track_length = 6.75119
+	mean_observations_per_image = 1769.15
+	mean_reprojection_error = 0.763503
+Number of images: 20
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/39 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 16
+	num_cameras = 11
+	num_points3D = 3926
+	num_observations = 11561
+	mean_track_length = 2.94473
+	mean_observations_per_image = 722.562
+	mean_reprojection_error = 0.892154
+Number of images: 16
+WARNING - no uv points, skipping image
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/4 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 23
+	num_cameras = 20
+	num_points3D = 20131
+	num_observations = 147793
+	mean_track_length = 7.34156
+	mean_observations_per_image = 6425.78
+	mean_reprojection_error = 0.763885
+Number of images: 23
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/40 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 21
+	num_cameras = 12
+	num_points3D = 8830
+	num_observations = 52581
+	mean_track_length = 5.95481
+	mean_observations_per_image = 2503.86
+	mean_reprojection_error = 0.438448
+Number of images: 21
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/41 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 13
+	num_cameras = 7
+	num_points3D = 1513
+	num_observations = 8277
+	mean_track_length = 5.47059
+	mean_observations_per_image = 636.692
+	mean_reprojection_error = 0.570306
+Number of images: 13
+WARNING: ambiguity (len(uv) == 2)
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/42 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 23
+	num_cameras = 12
+	num_points3D = 16718
+	num_observations = 99667
+	mean_track_length = 5.96166
+	mean_observations_per_image = 4333.35
+	mean_reprojection_error = 0.795656
+Number of images: 23
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/5 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 19
+	num_cameras = 8
+	num_points3D = 5068
+	num_observations = 32761
+	mean_track_length = 6.46429
+	mean_observations_per_image = 1724.26
+	mean_reprojection_error = 0.662151
+Number of images: 19
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/6 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 17
+	num_cameras = 3
+	num_points3D = 7
+	num_observations = 77
+	mean_track_length = 11
+	mean_observations_per_image = 4.52941
+	mean_reprojection_error = 0.0811715
+Number of images: 17
+WARNING - no uv points, skipping image
+WARNING - no uv points, skipping image
+WARNING - no uv points, skipping image
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/7 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 25
+	num_cameras = 10
+	num_points3D = 10736
+	num_observations = 78581
+	mean_track_length = 7.31939
+	mean_observations_per_image = 3143.24
+	mean_reprojection_error = 0.665269
+Number of images: 25
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/8 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 17
+	num_cameras = 9
+	num_points3D = 5717
+	num_observations = 38467
+	mean_track_length = 6.72853
+	mean_observations_per_image = 2262.76
+	mean_reprojection_error = 0.383283
+Number of images: 17
+../datasets/megascenes/notre_dame_paris/reconstruct/colmap/9 => ../Marigold/data/sfm/data/notre_dame_paris/np
+rel out dir (np): data/notre_dame_paris/np
+out dir images: undistorted_images/notre_dame_paris
+will write to: ../Marigold/data/sfm/data/notre_dame_paris/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 214
+	num_cameras = 104
+	num_points3D = 25773
+	num_observations = 237063
+	mean_track_length = 9.19811
+	mean_observations_per_image = 1107.77
+	mean_reprojection_error = 0.770528
+Number of images: 214
+Processing scene sagrada_familia ...
+Found reconstruction directories: ../datasets/megascenes/sagrada_familia/reconstruct/colmap/0
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/1
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/10
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/11
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/12
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/13
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/14
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/15
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/16
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/17
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/18
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/19
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/2
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/20
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/3
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/4
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/5
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/6
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/7
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/8
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/9
+
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/0 => ../Marigold/data/sfm/data/sagrada_familia/np
+rel out dir (np): data/sagrada_familia/np
+out dir images: undistorted_images/sagrada_familia
+will write to: ../Marigold/data/sfm/data/sagrada_familia/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 3383
+	num_cameras = 1562
+	num_points3D = 967405
+	num_observations = 8073634
+	mean_track_length = 8.34566
+	mean_observations_per_image = 2386.53
+	mean_reprojection_error = 0.662473
+Number of images: 3383
+WARNING: ambiguity (len(uv) == 2)
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/1 => ../Marigold/data/sfm/data/sagrada_familia/np
+rel out dir (np): data/sagrada_familia/np
+out dir images: undistorted_images/sagrada_familia
+will write to: ../Marigold/data/sfm/data/sagrada_familia/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 1383
+	num_cameras = 638
+	num_points3D = 245879
+	num_observations = 1584727
+	mean_track_length = 6.44515
+	mean_observations_per_image = 1145.86
+	mean_reprojection_error = 0.673513
+Number of images: 1383
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/10 => ../Marigold/data/sfm/data/sagrada_familia/np
+rel out dir (np): data/sagrada_familia/np
+out dir images: undistorted_images/sagrada_familia
+will write to: ../Marigold/data/sfm/data/sagrada_familia/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 37
+	num_cameras = 25
+	num_points3D = 13319
+	num_observations = 63673
+	mean_track_length = 4.78061
+	mean_observations_per_image = 1720.89
+	mean_reprojection_error = 0.627565
+Number of images: 37
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/11 => ../Marigold/data/sfm/data/sagrada_familia/np
+rel out dir (np): data/sagrada_familia/np
+out dir images: undistorted_images/sagrada_familia
+will write to: ../Marigold/data/sfm/data/sagrada_familia/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 20
+	num_cameras = 14
+	num_points3D = 8035
+	num_observations = 36437
+	mean_track_length = 4.53479
+	mean_observations_per_image = 1821.85
+	mean_reprojection_error = 0.490544
+Number of images: 20
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/12 => ../Marigold/data/sfm/data/sagrada_familia/np
+rel out dir (np): data/sagrada_familia/np
+out dir images: undistorted_images/sagrada_familia
+will write to: ../Marigold/data/sfm/data/sagrada_familia/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 30
+	num_cameras = 24
+	num_points3D = 9067
+	num_observations = 40832
+	mean_track_length = 4.50336
+	mean_observations_per_image = 1361.07
+	mean_reprojection_error = 0.648488
+Number of images: 30
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/13 => ../Marigold/data/sfm/data/sagrada_familia/np
+rel out dir (np): data/sagrada_familia/np
+out dir images: undistorted_images/sagrada_familia
+will write to: ../Marigold/data/sfm/data/sagrada_familia/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 10
+	num_cameras = 7
+	num_points3D = 1639
+	num_observations = 5953
+	mean_track_length = 3.63209
+	mean_observations_per_image = 595.3
+	mean_reprojection_error = 0.509747
+Number of images: 10
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/14 => ../Marigold/data/sfm/data/sagrada_familia/np
+rel out dir (np): data/sagrada_familia/np
+out dir images: undistorted_images/sagrada_familia
+will write to: ../Marigold/data/sfm/data/sagrada_familia/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 35
+	num_cameras = 19
+	num_points3D = 12918
+	num_observations = 59102
+	mean_track_length = 4.57517
+	mean_observations_per_image = 1688.63
+	mean_reprojection_error = 0.525031
+Number of images: 35
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/15 => ../Marigold/data/sfm/data/sagrada_familia/np
+rel out dir (np): data/sagrada_familia/np
+out dir images: undistorted_images/sagrada_familia
+will write to: ../Marigold/data/sfm/data/sagrada_familia/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 32
+	num_cameras = 20
+	num_points3D = 6041
+	num_observations = 27457
+	mean_track_length = 4.54511
+	mean_observations_per_image = 858.031
+	mean_reprojection_error = 0.499432
+Number of images: 32
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/16 => ../Marigold/data/sfm/data/sagrada_familia/np
+rel out dir (np): data/sagrada_familia/np
+out dir images: undistorted_images/sagrada_familia
+will write to: ../Marigold/data/sfm/data/sagrada_familia/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 11
+	num_cameras = 10
+	num_points3D = 3495
+	num_observations = 12201
+	mean_track_length = 3.49099
+	mean_observations_per_image = 1109.18
+	mean_reprojection_error = 0.677178
+Number of images: 11
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/17 => ../Marigold/data/sfm/data/sagrada_familia/np
+rel out dir (np): data/sagrada_familia/np
+out dir images: undistorted_images/sagrada_familia
+will write to: ../Marigold/data/sfm/data/sagrada_familia/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 11
+	num_cameras = 6
+	num_points3D = 1531
+	num_observations = 6108
+	mean_track_length = 3.98955
+	mean_observations_per_image = 555.273
+	mean_reprojection_error = 0.819135
+Number of images: 11
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/18 => ../Marigold/data/sfm/data/sagrada_familia/np
+rel out dir (np): data/sagrada_familia/np
+out dir images: undistorted_images/sagrada_familia
+will write to: ../Marigold/data/sfm/data/sagrada_familia/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 22
+	num_cameras = 13
+	num_points3D = 9121
+	num_observations = 51701
+	mean_track_length = 5.66835
+	mean_observations_per_image = 2350.05
+	mean_reprojection_error = 0.718619
+Number of images: 22
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/19 => ../Marigold/data/sfm/data/sagrada_familia/np
+rel out dir (np): data/sagrada_familia/np
+out dir images: undistorted_images/sagrada_familia
+will write to: ../Marigold/data/sfm/data/sagrada_familia/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 14
+	num_cameras = 13
+	num_points3D = 3374
+	num_observations = 11468
+	mean_track_length = 3.39893
+	mean_observations_per_image = 819.143
+	mean_reprojection_error = 0.52795
+Number of images: 14
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/2 => ../Marigold/data/sfm/data/sagrada_familia/np
+rel out dir (np): data/sagrada_familia/np
+out dir images: undistorted_images/sagrada_familia
+will write to: ../Marigold/data/sfm/data/sagrada_familia/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 20
+	num_cameras = 10
+	num_points3D = 14014
+	num_observations = 90173
+	mean_track_length = 6.43449
+	mean_observations_per_image = 4508.65
+	mean_reprojection_error = 0.453831
+Number of images: 20
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/20 => ../Marigold/data/sfm/data/sagrada_familia/np
+rel out dir (np): data/sagrada_familia/np
+out dir images: undistorted_images/sagrada_familia
+will write to: ../Marigold/data/sfm/data/sagrada_familia/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 10
+	num_cameras = 9
+	num_points3D = 939
+	num_observations = 3061
+	mean_track_length = 3.25985
+	mean_observations_per_image = 306.1
+	mean_reprojection_error = 0.333834
+Number of images: 10
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/3 => ../Marigold/data/sfm/data/sagrada_familia/np
+rel out dir (np): data/sagrada_familia/np
+out dir images: undistorted_images/sagrada_familia
+will write to: ../Marigold/data/sfm/data/sagrada_familia/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 25
+	num_cameras = 20
+	num_points3D = 18116
+	num_observations = 103052
+	mean_track_length = 5.68845
+	mean_observations_per_image = 4122.08
+	mean_reprojection_error = 0.820621
+Number of images: 25
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/4 => ../Marigold/data/sfm/data/sagrada_familia/np
+rel out dir (np): data/sagrada_familia/np
+out dir images: undistorted_images/sagrada_familia
+will write to: ../Marigold/data/sfm/data/sagrada_familia/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 20
+	num_cameras = 18
+	num_points3D = 18949
+	num_observations = 79660
+	mean_track_length = 4.20392
+	mean_observations_per_image = 3983
+	mean_reprojection_error = 0.620465
+Number of images: 20
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/5 => ../Marigold/data/sfm/data/sagrada_familia/np
+rel out dir (np): data/sagrada_familia/np
+out dir images: undistorted_images/sagrada_familia
+will write to: ../Marigold/data/sfm/data/sagrada_familia/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 20
+	num_cameras = 17
+	num_points3D = 19814
+	num_observations = 84852
+	mean_track_length = 4.28243
+	mean_observations_per_image = 4242.6
+	mean_reprojection_error = 0.566839
+Number of images: 20
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/6 => ../Marigold/data/sfm/data/sagrada_familia/np
+rel out dir (np): data/sagrada_familia/np
+out dir images: undistorted_images/sagrada_familia
+will write to: ../Marigold/data/sfm/data/sagrada_familia/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 20
+	num_cameras = 17
+	num_points3D = 19808
+	num_observations = 84828
+	mean_track_length = 4.28251
+	mean_observations_per_image = 4241.4
+	mean_reprojection_error = 0.566479
+Number of images: 20
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/7 => ../Marigold/data/sfm/data/sagrada_familia/np
+rel out dir (np): data/sagrada_familia/np
+out dir images: undistorted_images/sagrada_familia
+will write to: ../Marigold/data/sfm/data/sagrada_familia/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 20
+	num_cameras = 17
+	num_points3D = 19630
+	num_observations = 83946
+	mean_track_length = 4.27641
+	mean_observations_per_image = 4197.3
+	mean_reprojection_error = 0.604489
+Number of images: 20
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/8 => ../Marigold/data/sfm/data/sagrada_familia/np
+rel out dir (np): data/sagrada_familia/np
+out dir images: undistorted_images/sagrada_familia
+will write to: ../Marigold/data/sfm/data/sagrada_familia/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 22
+	num_cameras = 11
+	num_points3D = 8550
+	num_observations = 70308
+	mean_track_length = 8.22316
+	mean_observations_per_image = 3195.82
+	mean_reprojection_error = 0.558754
+Number of images: 22
+../datasets/megascenes/sagrada_familia/reconstruct/colmap/9 => ../Marigold/data/sfm/data/sagrada_familia/np
+rel out dir (np): data/sagrada_familia/np
+out dir images: undistorted_images/sagrada_familia
+will write to: ../Marigold/data/sfm/data/sagrada_familia/data.txt
+Reconstruction summary:
+Reconstruction:
+	num_reg_images = 21
+	num_cameras = 11
+	num_points3D = 6708
+	num_observations = 48367
+	mean_track_length = 7.21035
+	mean_observations_per_image = 2303.19
+	mean_reprojection_error = 0.736349
+Number of images: 21
+Stats:
+swapped: mean: 0.079, 19646 items
+inconsistent dimensions: mean: 0.000, 19646 items
+no uv points: mean: 0.001, 19646 items
+out_of_image: mean: 0.002, 19625 items
+ambiguity (len(uv) == 2): mean: 0.000, 19625 items
+exception: mean: 0.000, 19625 items
+valid_points: mean: 300070.150, 113 items
+Elapsed time: 5841.264 s.
