@@ -57,6 +57,6 @@ def run_for_scene(scenes):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument("--scenes", nargs="+", help="scene (e.g., 'prasna_brana karluv most')", required=False, default="all")
+    parser.add_argument("--scenes", nargs="+", help="scene (e.g., 'prasna_brana karluv most')", required=False, default=["all"])
     args = parser.parse_args()
     run_for_scene(args.scenes)
