@@ -130,17 +130,17 @@ def get_camera_params(reconstruction, colmap_image, img_np):
         return None, None, None, None, None, None
 
 
-def run(in_dir,
-        out_dir_data,
-        out_dir_images,
-        orig_out_dir_images,
-        append,
-        conflict_names,
-        rel_out_dir,
-        undistort=True,
-        max_items=None,
-        read_again=False,
-        write=True):
+def run_for_indir(in_dir,
+                  out_dir_data,
+                  out_dir_images,
+                  orig_out_dir_images,
+                  append,
+                  conflict_names,
+                  rel_out_dir,
+                  undistort=True,
+                  max_items=None,
+                  read_again=False,
+                  write=True):
     """
     How it works:
 
@@ -339,7 +339,7 @@ def run(in_dir,
     return None
 
 
-def run_for_scene(args):
+def run_for_scenes_or_indir(args):
     """
     ... or for one-off input dir
     :param args:
@@ -380,33 +380,33 @@ def run_for_scene(args):
             orig_dir_imgs = f"images/{scene}"
             rel_out_dir = str(pathlib.Path(output_dir_data).relative_to(pathlib.Path(f"{marigold_rel_path}/data/sfm")))
             for i, rec_dir in enumerate(reconstruction_dirs):
-                r = run(rec_dir,
-                        output_dir_data,
-                        output_dir_imgs,
-                        orig_dir_imgs,
-                        i != 0,
-                        set(),
-                        rel_out_dir,
-                        undistort=args.undistort,
-                        max_items=args.max_items,
-                        write=True,
-                        read_again=False)
+                r = run_for_indir(rec_dir,
+                                  output_dir_data,
+                                  output_dir_imgs,
+                                  orig_dir_imgs,
+                                  i != 0,
+                                  set(),
+                                  rel_out_dir,
+                                  undistort=args.undistort,
+                                  max_items=args.max_items,
+                                  write=True,
+                                  read_again=False)
                 if r is not None:
-                    break
+                    break # to the outer loop (=next scene)
 
     else:
-        run(args.input_dir,
-            # TODO totally not tested
-            args.output_dir,
-            args.output_dir,
-            args.output_dir,
-            False,
-            set(),
-            None,
-            undistort=args.undistort,
-            max_items=args.max_items,
-            write=True,
-            read_again=False)
+        run_for_indir(args.input_dir,
+                      # TODO totally not tested
+                      args.output_dir,
+                      args.output_dir,
+                      args.output_dir,
+                      False,
+                      set(),
+                      None,
+                      undistort=args.undistort,
+                      max_items=args.max_items,
+                      write=True,
+                      read_again=False)
 
 
 class Data:
@@ -434,7 +434,7 @@ if __name__ == '__main__':
     if args.scenes is not None and (args.input_dir is not None or args.output_dir is not None):
         raise ValueError("--scene and (--input_dir or --output_dir) both present")
 
-    run_for_scene(args)
+    run_for_scenes_or_indir(args)
     e = time.time()
     Stats.print_stats()
     print(f"Elapsed time: {e-s:.03f} s.")
