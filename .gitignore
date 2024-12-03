@@ -2,4 +2,5 @@
 .idea
 ignore
 data
+output
 __pycache__

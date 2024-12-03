@@ -230,7 +230,7 @@ def run_for_indir(in_dir,
             for p2d in colmap_image.points2D:
 
                 # NOTE: p2d.point3D_id = 18446744073709551615 (== -1 with the right arithmetic)
-                if p2d.point3D_id > 10 ** 11:
+                if p2d.point3D_id > 10 ** 11 or p2d.point3D_id == -1:
                     continue
 
                 # world coords => camera coords
