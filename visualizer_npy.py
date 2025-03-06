@@ -77,6 +77,10 @@ def visualize(depth_file, rgb_file, f):
     else:
         raise ValueError("depth_file must end with .npy or .npz")
 
+    if len(npy_np.shape) == 4:
+        assert npy_np.shape[0] == npy_np.shape[1] == 1
+        npy_np = npy_np.squeeze()
+
     show_inverse = False
     if show_inverse:
         npy_np = 1 / np.clip(npy_np, a_min=1.0, a_max=300)
@@ -88,8 +92,11 @@ def visualize(depth_file, rgb_file, f):
     vs = []
 
     npy_np[npy_np == np.inf] = 0.1
+    #npy_np = (npy_np * 255).astype(np.uint16)[..., None] + 100
+    npy_np = (npy_np * 255).astype(np.uint16)[..., None]
+    npy_np = np.ascontiguousarray(npy_np)
 
-    depth_img = open3d.geometry.Image((npy_np * 255).astype(np.uint16)[..., None] + 100)
+    depth_img = open3d.geometry.Image(npy_np)
     vs.append(vis(width, height, f, depth_img))
 
     # depth_img = open3d.geometry.Image(((1 / npy_np) * 255).astype(np.uint16)[..., None])
@@ -123,6 +130,18 @@ if __name__ == '__main__':
     parser.add_argument('--f', type=float, required=False, default=1000.0)
     args = parser.parse_args()
 
-    rgb_file = "data/depths/input/example_0.jpg"
+    # rgb_file = "data/depths/input/example_0.jpg"
+    # rgb_file = "../output_loss_rci/glise_St_Ignace_Loyola_Prague_17png_depth_pred.npy"
+    # rgb_file = "../Marigold/output_vis/depths_train_infer_Notre_dame._Paris.png.npy"
     # depth_file = "data/depths/depth_simple/depth.png"
-    visualize(args.depth_file, rgb_file, args.f)
+    # --depth_file ../../../dev/marigold_local/output_loss_rci/glise_St_Ignace_Loyola_Prague_17png_depth_pred.npy
+    # --depth_file ../../mount_rci/marigold_private/output_vis/depths_train_glise_St_Ignace_Loyola_Prague_17.png.npy
+    # --depth_file ../../../dev/marigold_local/output_loss_rci/The_Old_Praha_Gate_Powder_Tower__panoramio__Andrej_Kunieykpng_depth_pred.npy
+
+    depth_file = args.depth_file
+    depth_file = "../../../dev/marigold_local/output_loss_rci/The_Old_Praha_Gate_Powder_Tower__panoramio__Andrej_Kunieykpng_depth_pred.npy"
+    #depth_file = "../../../dev/marigold_local/output_vis_rci/depths_train_Sydney_(AU),_Opera_House_--_2019_--_2994.png.npy"
+    depth_file = "../../../dev/marigold_local/output_loss_rci/glise_St_Ignace_Loyola_Prague_17png_depth_pred.npy"
+    #depth_file = "../../mount_rci/marigold_private/output_vis/depths_train_glise_St_Ignace_Loyola_Prague_17.png.npy"
+
+    visualize(depth_file, rgb_file=None, f=args.f)

@@ -203,10 +203,12 @@ def run_for_indir(in_dir,
             image_items = image_items[:max_items]
         print(f"Number of images: {len(image_items)}")
 
-        # marigold_rel_path = "../Marigold"
-        marigold_rel_path = "../marigold_private"
+        marigold_rel_path = "../Marigold"
+        # marigold_rel_path = "../marigold_private"
 
         for _, colmap_image in tqdm(image_items):
+
+            print(f"processing image: {colmap_image.name}")
 
             ds_rgb_path = str(pathlib.Path(colmap_image.name).relative_to(pathlib.Path("commons")))
             ds_rgb_path = os.path.join(orig_out_dir_images, ds_rgb_path)
@@ -254,6 +256,7 @@ def run_for_indir(in_dir,
 
             camera_coords = np.array(camera_coords_l)
 
+            print(f"max: uv: {uv[:, 0].max()},{uv[:, 1].max()} vs sizes: {c_width}x{c_height}")
             if uv.min() < 0.0 or uv[:, 0].max() > c_width - 1 or uv[:, 1].max() > c_height - 1:
                 Stats.stat_m["out_of_image"].append(1)
                 # print("WARNING does not fit")
@@ -268,6 +271,7 @@ def run_for_indir(in_dir,
             if undistort:
                 try:
                     calib_matrix, img_np, uv = undistort_image(calib_matrix, dist_coeffs, uv, img_np)
+                    print(f"after undistortion max: uv: {uv[:, 0].max()},{uv[:, 1].max()} vs sizes: {c_width}x{c_height}")
                 except Exception:
                     print(traceback.format_exc())
                     print("WARNING skipping image")
@@ -389,7 +393,7 @@ def run_for_scenes_or_indir(args):
                                   rel_out_dir,
                                   undistort=args.undistort,
                                   max_items=args.max_items,
-                                  write=True,
+                                  write=False,
                                   read_again=False)
                 if r is not None:
                     break # to the outer loop (=next scene)
@@ -405,7 +409,7 @@ def run_for_scenes_or_indir(args):
                       None,
                       undistort=args.undistort,
                       max_items=args.max_items,
-                      write=True,
+                      write=False,
                       read_again=False)
 
 

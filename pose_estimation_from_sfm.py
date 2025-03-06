@@ -1,6 +1,7 @@
 import argparse
 import math
 import os
+import pathlib
 import time
 import cv2 as cv
 import numpy as np
@@ -8,7 +9,7 @@ import pycolmap
 import torch
 from pyquaternion import Quaternion
 
-from p3p_ransac import CVP3P_solver, P3P_RANSAC
+from p3p_ransac import P3P_RANSAC, P3P_depth_solver, BaseP3PSolver
 
 
 def get_scene(rec_dir):
@@ -25,13 +26,16 @@ class ETH3DSfmLayout(SfmLayout):
 
     @staticmethod
     def get_all_layouts(root_dir, dm_root_dir):
-        rec_paths = [os.path.join(root_dir, f, "dslr_calibration_undistorted") for f in os.listdir(root_dir)
+
+        ldir = sorted([f for f in os.listdir(root_dir)])
+
+        rec_paths = [os.path.join(root_dir, f, "dslr_calibration_undistorted") for f in ldir
                      if os.path.isdir(os.path.join(root_dir, f, "dslr_calibration_undistorted"))]
-        img_paths = [os.path.join(root_dir, f, "images") for f in os.listdir(root_dir)
+        img_paths = [os.path.join(root_dir, f, "images") for f in ldir
                      if os.path.isdir(os.path.join(root_dir, f, "images/dslr_images_undistorted"))]
-        scenes = [f for f in os.listdir(root_dir)
+        scenes = [f for f in ldir
                   if os.path.isdir(os.path.join(root_dir, f, "images/dslr_images_undistorted"))]
-        dm_paths = [os.path.join(dm_root_dir, f, "images") for f in os.listdir(dm_root_dir)
+        dm_paths = [os.path.join(dm_root_dir, f, "images") for f in ldir
                     if os.path.isdir(os.path.join(dm_root_dir, f, "images/dslr_images_undistorted"))]
         return [ETH3DSfmLayout(*kw) for kw in zip(rec_paths, img_paths, dm_paths, scenes)]
         # return [ETH3DSfmLayout(r, i, d, s) for r, i, d, s in zip(rec_paths, img_paths, dm_paths, scenes)]
@@ -46,11 +50,12 @@ class ETH3DSfmLayout(SfmLayout):
         self.dm_dir = dm_dir
         self.scene = scene
 
-    def get_image_path(self, image_name):
-        return os.path.join(self.img_dir, image_name)
+    def get_image_path(self, image_path):
+        return os.path.join(self.img_dir, image_path)
 
-    def get_dm_path(self, image_name):
-        return os.path.join(self.dm_dir, f"pred_{image_name[:-4]}.npy")
+    def get_dm_path(self, image_path):
+        name = pathlib.Path(image_path).name
+        return os.path.join(self.dm_dir, f"dslr_images_undistorted/pred_{name[:-4]}.npz")
 
 
 class MegascenesSfmLayout(SfmLayout):
@@ -148,10 +153,20 @@ def pose_est_from_sfm(sfm_layout: ETH3DSfmLayout, ransac: P3P_RANSAC, only_n_img
         X = torch.from_numpy(corrs_3d).to(device)
 
         dm = sfm_layout.get_dm_path(image.name)
+        depth_map = np.load(dm)["depth"]
+        depth_map = torch.from_numpy(depth_map).to(device)
         Rt_gt = image.cam_from_world.matrix()
 
         start = time.time()
-        best_model_Rt, best_inliers = ransac.forward(X, x)
+        # min_solver = BaseP3PSolver(cv_flag=cv.SOLVEPNP_P3P)
+        min_solver = P3P_depth_solver(depth_map=depth_map,
+                                      K=K,
+                                      projection_th_sq=Data.inl_th,
+                                      # TODO random
+                                      depth_th_sq=10000,
+                                      cv_flag=cv.SOLVEPNP_P3P
+                                      )
+        best_model_Rt, best_inliers = ransac.forward(X, x, min_solver)
         best_model_Rt = best_model_Rt.detach().cpu().numpy()
         end = time.time()
         Data.el_time += (end - start)
@@ -167,6 +182,8 @@ def pose_est_from_sfm(sfm_layout: ETH3DSfmLayout, ransac: P3P_RANSAC, only_n_img
 
 class Data:
     el_time: float = 0.0
+    #inl_th = 0.0005
+    inl_th = 50
 
 
 if __name__ == '__main__':
@@ -181,14 +198,13 @@ if __name__ == '__main__':
 
     # TODO set random seed to get deterministic results?
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    min_solver = CVP3P_solver(cv_flag=cv.SOLVEPNP_P3P)
-    ransac = P3P_RANSAC(minimal_solver=min_solver,
-                        batch_size=args.batch_size,
+    ransac = P3P_RANSAC(batch_size=args.batch_size,
                         confidence=1 - 1e-6,
-                        inl_th=0.0005)
+                        inl_th=Data.inl_th)
 
     # m_layout = MegascenesSfmLayout(args.rec_dir)
 
+    # TODO fix me once again ...
     # m_layouts = ETH3DSfmLayout.get_all_layouts(root_dir="data/local_data/eth3d",
     #                                            dm_root_dir="data/local_data/eth3d_dm")
 
