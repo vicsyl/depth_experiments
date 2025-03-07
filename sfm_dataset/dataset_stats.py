@@ -177,6 +177,11 @@ def reconstruction_stats(name, short_i, data):
         save_img_file = f'data/img_gallery/{scene_key.replace("/", "_")}_{dir}_{name.replace("/", "_")}.png'
         os.makedirs(pathlib.Path(save_img_file).parent, exist_ok=True)
         fig.savefig(save_img_file)
+        th = 100
+        if len(points_counts) > th:
+            save_img_file = f'data/img_gallery_{th}/{scene_key.replace("/", "_")}_{dir}_{name.replace("/", "_")}.png'
+            os.makedirs(pathlib.Path(save_img_file).parent, exist_ok=True)
+            fig.savefig(save_img_file)
         if show:
             fig.show()
 
