@@ -258,7 +258,7 @@ def main():
     for i, (name, short_i) in tqdm(enumerate(ids_names)):
         #get_image_stats(name, short_i, data)
         reconstruction_stats(name, short_i, data)
-        if (i + 1) % args.save_period == 0:
+        if (i - 10) % args.save_period == 0:
             save_data()
 
     save_data()
