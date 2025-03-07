@@ -1,3 +1,4 @@
+import argparse
 import json
 import logging
 import os
@@ -12,7 +13,6 @@ import numpy as np
 import pycolmap
 from tqdm import tqdm
 
-from depths_from_sfm import get_camera_params
 from utils import config_logging
 
 img_suffixes = set([".jpg", ".jpeg", ".png"])
@@ -42,8 +42,8 @@ def run_subprocess(cmd: List[str], log=True):
     process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     stdout, stderr = process.communicate()
     if log:
-        logging.info(f"stdout: \n {stdout}")
-        logging.info(f"stderr: \n {stderr}")
+        logging.info(f"stdout: {stdout}")
+        logging.info(f"stderr: {stderr}")
     return process.returncode, stdout
 
 
@@ -52,10 +52,11 @@ def download_reconstruction(short_i, just_remove=False):
     @param short_i:
     @return: success, to_dir
     """
-    to_dir = "sfm_dataset/work/reconstruction"
+    to_dir = "data/sfm_work/reconstruction"
     rm_dir = f"{to_dir}/*"
     scene_key = get_key_from_short_index(short_i)
-    scene_key = "000/001"
+    # testing
+    # scene_key = "000/001"
 
     # remove the previous working data
     command = ["rm", "-rf", rm_dir]
@@ -149,17 +150,31 @@ def reconstruction_stats(name, short_i, data):
     data[short_i]["short_i"] = short_i
     data[short_i]["scene_key"] = scene_key
 
-    def generate_hists(points_counts, points_densities, bns=100, show=False):
-        fig, axs = plt.subplots(1, 2, figsize=(10, 6))
+    def generate_hists(points_counts, dimensions, bns=100, show=False):
+
+        max_dims = [max(d1, d2) for d1, d2 in dimensions]
+        areas = [(d1 * d2) for d1, d2 in dimensions]
+        points_densities = [p / a for a, p in zip(areas, points_counts)]
+
+        fig, axs = plt.subplots(1, 4, figsize=(10, 4))
         fig.suptitle(f"{scene_key}_{name}_{dir} - {len(points_counts)} images")
         counts, bins = np.histogram(points_counts, bins=bns)
         axs[0].set_title("points counts")
-        axs[0].stairs(counts, bins)  # IMHO works better than plt.axis.hist
-        axs[1].set_title("points densities")
-        counts, bins = np.histogram(points_densities, bins=bns)
-        axs[1].stairs(counts, bins)  # IMHO works better than plt.axis.hist
+        axs[0].stairs(counts, bins)
 
-        save_img_file = f'data/img_gallery/{scene_key.replace("/", "_")}_{dir}_{name}.png'
+        counts, bins = np.histogram(points_densities, bins=bns)
+        axs[1].set_title("points densities")
+        axs[1].stairs(counts, bins)
+
+        counts, bins = np.histogram(areas, bins=bns)
+        axs[2].set_title("areas")
+        axs[2].stairs(counts, bins)
+
+        counts, bins = np.histogram(max_dims, bins=bns)
+        axs[3].set_title("max dimension")
+        axs[3].stairs(counts, bins)
+
+        save_img_file = f'data/img_gallery/{scene_key.replace("/", "_")}_{dir}_{name.replace("/", "_")}.png'
         os.makedirs(pathlib.Path(save_img_file).parent, exist_ok=True)
         fig.savefig(save_img_file)
         if show:
@@ -170,7 +185,11 @@ def reconstruction_stats(name, short_i, data):
         logging.info(f"could not download reconstruction {name}")
         data[short_i]["success"] = 0
         return
+
+    data[short_i]["success"] = 1
+    data[short_i]["reconstructions"] = []
     for dir in os.listdir(out_dir):
+
         in_dir = os.path.join(out_dir, dir)
         points_counts, dimensions = one_reconstruction_stats(in_dir)
 
@@ -180,10 +199,8 @@ def reconstruction_stats(name, short_i, data):
                             points_counts=points_counts,
                             dimensions=dimensions)
 
-        points_densities = [p / (d1 * d2) for (d1, d2), p in zip(dimensions, points_counts)]
-        generate_hists(points_counts, points_densities)
-        data[short_i]["success"] = 1
-        data[short_i]["imgs"] = len(points_counts)
+        generate_hists(points_counts, dimensions)
+        data[short_i]["reconstructions"].append({"name": dir, "imgs": len(points_counts)})
 
     download_reconstruction(short_i, just_remove=True)
 
@@ -218,23 +235,34 @@ def one_reconstruction_stats(in_dir):
 
 def main():
 
-    #read_n = 2
-    data = {}
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--max_scenes", type=int, required=False, default=None,)
+    parser.add_argument("--save_period", type=int, required=False, default=1000)
+    args = parser.parse_args()
 
-    with open("./sfm_dataset/categories.json", "rb") as fd:
+    data = {}
+    with open("./data/sfm_work/categories.json", "rb") as fd:
         js = json.load(fd)
 
-    #for name, short_i in list(js.items())[:read_n]:
-    for name, short_i in list(js.items()):
+    ids_names = list(js.items())
+    if args.max_scenes is not None:
+        ids_names = ids_names[:args.max_scenes]
+
+    def save_data(fp="./data/stats.py"):
+        with open(fp, "w") as fd:
+            fd.write("data = {}\n")
+            for k, v in data.items():
+                fd.write(f"data[{k}] = {v}\n")
+        logging.info(f"data saved to {fp}")
+
+    for i, (name, short_i) in tqdm(enumerate(ids_names)):
         #get_image_stats(name, short_i, data)
         reconstruction_stats(name, short_i, data)
+        if (i + 1) % args.save_period == 0:
+            save_data()
 
-    logging.info("data:")
-    logging.info(data)
-    with open("./data/stats.py", "w") as fd:
-        fd.write("data = {}\n")
-        for k, v in data.items():
-            fd.write(f"data[{k}] = {v}\n")
+    save_data()
+    logging.info("Done")
 
 
 if __name__ == '__main__':
