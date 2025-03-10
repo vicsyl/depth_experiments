@@ -150,7 +150,7 @@ def reconstruction_stats(name, short_i, data):
     data[short_i]["short_i"] = short_i
     data[short_i]["scene_key"] = scene_key
 
-    def generate_hists(points_counts, dimensions, bns=100, show=False):
+    def generate_hists(points_counts, dimensions, bns=100, show=False, generate_sparse_gallery=False):
 
         max_dims = [max(d1, d2) for d1, d2 in dimensions]
         areas = [(d1 * d2) for d1, d2 in dimensions]
@@ -174,9 +174,10 @@ def reconstruction_stats(name, short_i, data):
         axs[3].set_title("max dimension")
         axs[3].stairs(counts, bins)
 
-        save_img_file = f'data/img_gallery/{scene_key.replace("/", "_")}_{dir}_{name.replace("/", "_")}.png'
-        os.makedirs(pathlib.Path(save_img_file).parent, exist_ok=True)
-        fig.savefig(save_img_file)
+        if generate_sparse_gallery:
+            save_img_file = f'data/img_gallery/{scene_key.replace("/", "_")}_{dir}_{name.replace("/", "_")}.png'
+            os.makedirs(pathlib.Path(save_img_file).parent, exist_ok=True)
+            fig.savefig(save_img_file)
         th = 100
         if len(points_counts) > th:
             save_img_file = f'data/img_gallery_{th}/{scene_key.replace("/", "_")}_{dir}_{name.replace("/", "_")}.png'
