@@ -241,11 +241,17 @@ def one_reconstruction_stats(in_dir):
 def main():
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--max_scenes", type=int, required=False, default=None,)
+    parser.add_argument("--read_previous", action=argparse.BooleanOptionalAction, required=False, default=True)
+    parser.add_argument("--max_scenes", type=int, required=False, default=None)
     parser.add_argument("--save_period", type=int, required=False, default=1000)
     args = parser.parse_args()
 
-    data = {}
+    if args.read_previous:
+        from data.stats_read import data
+        data_l = data
+    else:
+        data_l = {}
+
     with open("./data/sfm_work/categories.json", "rb") as fd:
         js = json.load(fd)
 
@@ -256,13 +262,16 @@ def main():
     def save_data(fp="./data/stats.py"):
         with open(fp, "w") as fd:
             fd.write("data = {}\n")
-            for k, v in data.items():
+            for k, v in data_l.items():
                 fd.write(f"data[{k}] = {v}\n")
         logging.info(f"data saved to {fp}")
 
     for i, (name, short_i) in tqdm(enumerate(ids_names)):
+        if short_i in data_l:
+            logging.info(f"skipping {name} as it is {short_i=} is already in the map")
+            continue
         #get_image_stats(name, short_i, data)
-        reconstruction_stats(name, short_i, data)
+        reconstruction_stats(name, short_i, data_l)
         if (i - 10) % args.save_period == 0:
             save_data()
 
@@ -270,6 +279,24 @@ def main():
     logging.info("Done")
 
 
+def stats_filter():
+    from data.stats import data
+    print(f"{len(data)=}")
+    data = {k: v for k, v in data.items() if v["success"] == 1}
+    print(f"sucesses: {len(data)=}")
+
+    all_images = []
+    for k, v in data.items():
+        s = 0
+        for i in v['reconstructions']:
+            s += i['imgs']
+        all_images.append((k, s, v['name']))
+
+    all_images = sorted(all_images, key=lambda x: x[1])
+    print("\n".join([str(i) for i in all_images]))
+
+
 if __name__ == '__main__':
     config_logging()
     main()
+    #stats_filter()
