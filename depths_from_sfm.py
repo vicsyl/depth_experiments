@@ -219,7 +219,7 @@ def run_for_dir(in_dir,
             # IMHO this looks to the symlink
             if not os.path.exists(eff_rgb_path):
                 if len(Log.output) == 0:
-                    Log.output.append("Missing reconstruction dirs:")
+                    Log.output.append(f"In reconstruction dir {in_dir} missing path {eff_rgb_path}")
                 Log.output.append(in_dir)
                 return "missing"
             img_np = cv.imread(eff_rgb_path)
