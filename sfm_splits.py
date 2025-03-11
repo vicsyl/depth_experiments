@@ -114,6 +114,8 @@ def generate_splits_for_scene(splits_scenes_limits,
             if max_per_scene:
                 lines = lines[:max_per_scene]
 
+            all_lc = len(lines)
+            f_lc = 0
             for line in tqdm(lines):
 
                 line_in = line.strip().split(" ")
@@ -138,6 +140,9 @@ def generate_splits_for_scene(splits_scenes_limits,
                     continue
 
                 all_lines.append(line)
+                f_lc += 1
+
+            logging.info(f"{f_lc}/{all_lc} lines filtered")
 
         if shuffle:
             random.shuffle(all_lines)
