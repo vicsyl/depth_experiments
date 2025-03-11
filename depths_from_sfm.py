@@ -14,14 +14,18 @@ import pycolmap
 from tqdm import tqdm
 
 
-# TODO output CAMERA_PINHOLE - so for now the changes are
-# a) small change due to the undistortion
-# b) possibly swapped 2 params (x <-> y)
-# TODO depth in meters?
-# TODO check/filter on the track length etc...
+# TODO - AIs:
+# * clean the code! (in parallel to other tasks)
+# * check/filter on the track length etc...
 
-def get_data_file_key(colmap_image_name, conflict_names):
-    depth_data_file_key = Path(colmap_image_name).name[:-4]
+def get_data_file_key(colmap_image_name, conflict_names, old_file_keys):
+
+    path = Path(colmap_image_name)
+    if old_file_keys:
+        depth_data_file_key = path.stem
+    else:
+        depth_data_file_key = f'{path.stem}_{path.suffix}'
+
     if conflict_names.__contains__(depth_data_file_key):
         for i in range(1000):
             depth_data_file_key_new = f"{depth_data_file_key}_{i}"
@@ -34,13 +38,13 @@ def get_data_file_key(colmap_image_name, conflict_names):
     return depth_data_file_key
 
 
-def undistort_image(calib_matrix, dist_coeffs, uv, img):
+def undistort_image(calib_matrix, dist_coeffs, uv, img_np):
     """
     :param calib_matrix:
     :param dist_coeffs:
     :param uv: [N, 2] - (n, x/y)
-    :param img:
-    :return: undistorted_imd, undistorted_uv
+    :param img_np:
+    :return: new_calib_matrix, undistorted_img_np, undistorted_uv
     """
     show = False
     log = False
@@ -51,16 +55,21 @@ def undistort_image(calib_matrix, dist_coeffs, uv, img):
         print(f"dist_coeffs = {dist_coeffs}")
         print(f"uv = {uv[:100]}")
 
-    new_calib_matrix, roi = cv.getOptimalNewCameraMatrix(calib_matrix, dist_coeffs, (img.shape[1], img.shape[0]),
-                                                         alpha=1.0,
-                                                         centerPrincipalPoint=True)
-    undistorted_img = cv.undistort(img, calib_matrix, dist_coeffs, None, new_calib_matrix)
-
     if len(uv) == 2:
         print("WARNING: ambiguity (len(uv) == 2)")
         Stats.stat_m["ambiguity (len(uv) == 2)"].append(1)
     else:
         Stats.stat_m["ambiguity (len(uv) == 2)"].append(0)
+
+    # NOTE: validPixROI - Optional output rectangle that outlines all-good-pixels region in the undistorted image.
+    # See roi1, roi2 description in stereoRectify
+    new_calib_matrix, validPixROI = cv.getOptimalNewCameraMatrix(calib_matrix,
+                                                         dist_coeffs,
+                                                         (img_np.shape[1], img_np.shape[0]),
+                                                         alpha=1.0,
+                                                         centerPrincipalPoint=True)
+
+    undistorted_img_np = cv.undistort(img_np, calib_matrix, dist_coeffs, None, new_calib_matrix)
 
     undistorted_uv = cv.undistortPoints(uv, calib_matrix, dist_coeffs, None, new_calib_matrix)
     undistorted_uv = undistorted_uv[:, 0]
@@ -68,15 +77,15 @@ def undistort_image(calib_matrix, dist_coeffs, uv, img):
     if show:
         plt.figure()
         plt.title("original image")
-        plt.imshow(img)
+        plt.imshow(img_np)
         plt.show()
 
         plt.figure()
         plt.title("undistorted image")
-        plt.imshow(undistorted_img)
+        plt.imshow(undistorted_img_np)
         plt.show()
 
-    return new_calib_matrix, undistorted_img, undistorted_uv
+    return new_calib_matrix, undistorted_img_np, undistorted_uv
 
 
 class Stats:
@@ -96,9 +105,7 @@ def get_camera_params(reconstruction, colmap_image, img_np):
 
     params = camera.params
     dist_coeffs = (params[3], 0.0, 0.0, 0.0)
-    # TODO remove this
-    # camera_params = f"{cmodel} {camera.camera_id} {c_width} {c_height} {' '.join([params[0], params[1], params[2], params[3]])}"
-    # model camera_id width height f cx cy k
+
     camera_params = [cmodel, camera.camera_id]
 
     if camera.width == img_np.shape[0] and camera.height == img_np.shape[1]:
@@ -130,45 +137,37 @@ def get_camera_params(reconstruction, colmap_image, img_np):
         return None, None, None, None, None, None
 
 
-def run_for_indir(in_dir,
-                  out_dir_data,
-                  out_dir_images,
-                  orig_out_dir_images,
-                  append,
-                  conflict_names,
-                  rel_out_dir,
-                  undistort=True,
-                  max_items=None,
-                  read_again=False,
-                  write=True):
+def run_for_dir(in_dir,
+                out_dir_data,
+                out_dir_images,
+                orig_out_dir_images,
+                append: bool,
+                rel_out_dir,
+                undistort=True,
+                max_items=None,
+                read_again=False,
+                write=True,
+                old_file_keys=False):
     """
+    FIXME update this
     How it works:
 
     * provide int/out_dir or scene (e.g. in => megascenes.../scene/... out => Marigold/data/sfm/{scene})
     * the .npz files contain keys 'uv' and 'camera_coords'
 
-    * creates:
+    * layout:
 
-    Marigold/data/sfm/{scene}/
-          ---> commons -> link to commons with images
-          ---> val
-               data --->
-                    img1.npz
-                    img2.npz
-                    img3.npz
-               val.txt
-          ---> train
-               data --->
-                    img1.npz
-                    img2.npz
-                    img3.npz
-               train.txt
-          ---> eval
-               data --->
-                    img1.npz
-                    img2.npz
-                    img3.npz
-               eval.txt
+    {marigold_dir}/data/sfm/
+
+         ./data/{scene}
+            ./np/{img.npz} - 'uv' and 'camera_coords' keys
+            ./data.txt - items
+
+         ./images/{scene} - symlink to {megascenes_dir}/{scene_imgs}
+
+         ./undistorted_images/{scene}
+
+         ./{split_file_name}.txt
 
     :param in_dir: e.g., ../datasets/megascenes/{scene}/reconstruct/colmap/0
     :param out_dir_data: e.g., ../Marigold/data/sfm/data/{scene}  or ./data/sfm/one_off
@@ -176,8 +175,11 @@ def run_for_indir(in_dir,
     :param append:
     :param write:
     :param read_again:
-    :return:
+    :return: error (in str) or None
     """
+
+    conflict_names = set()
+
     assert not read_again or write
     np_out_dir = os.path.join(out_dir_data, "np")
     Path(np_out_dir).mkdir(parents=True, exist_ok=True)
@@ -213,10 +215,12 @@ def run_for_indir(in_dir,
             ds_rgb_path = str(pathlib.Path(colmap_image.name).relative_to(pathlib.Path("commons")))
             ds_rgb_path = os.path.join(orig_out_dir_images, ds_rgb_path)
             eff_rgb_path = os.path.join(f"{marigold_rel_path}/data/sfm", ds_rgb_path)
+
+            # IMHO this looks to the symlink
             if not os.path.exists(eff_rgb_path):
-                if len(Data.output) == 0:
-                    Data.output.append("Missing reconstruction dirs:")
-                Data.output.append(in_dir)
+                if len(Log.output) == 0:
+                    Log.output.append("Missing reconstruction dirs:")
+                Log.output.append(in_dir)
                 return "missing"
             img_np = cv.imread(eff_rgb_path)
             c_width, c_height, calib_matrix, camera_params, dist_coeffs, swapped = get_camera_params(reconstruction,
@@ -242,6 +246,13 @@ def run_for_indir(in_dir,
 
                 uv_l.append(p2d.xy)
                 camera_coords_l.append(camera_coords)
+
+            # NOTE - generally I restrain from doing some filtering or normalization here just because it can
+            #  always be done later / on the fly
+            #  I can
+            # a) filter on minimum number of points in image
+            # b) if there is a conflict (uv[i1].int() == uv[i2].int()) - handle it later
+            # c) some normalization - e.g., image size
 
             uv = np.array(uv_l)
             if uv.shape[0] == 0:
@@ -284,8 +295,7 @@ def run_for_indir(in_dir,
                     continue
                 Stats.stat_m["exception"].append(0)
 
-                # FIXME remove d altogether...
-                # model camera_id width height f cx cy d
+                # model camera_id width height f cx cy
                 camera_params = ["SIMPLE_PINHOLE",
                                  camera_params[1],
                                  img_np.shape[1],
@@ -294,7 +304,8 @@ def run_for_indir(in_dir,
                                  calib_matrix[0, 2],
                                  calib_matrix[1, 2]]
             else:
-                # I MHO this will soon be obsolete as everything for undistort == False
+                # NOTE this will soon be obsolete as everything for undistort == False
+                # model camera_id width height f cx cy d
                 camera_params = [camera_params[0],
                                  camera_params[1],
                                  img_np.shape[1],
@@ -307,7 +318,7 @@ def run_for_indir(in_dir,
             camera_params = " ".join([str(i) for i in camera_params])
             valid_points += len(uv_l)
             if write:
-                depth_data_file_key = get_data_file_key(colmap_image.name, conflict_names)
+                depth_data_file_key = get_data_file_key(colmap_image.name, conflict_names, old_file_keys)
                 depth_data_path = os.path.join(np_out_dir, f"{depth_data_file_key}.npz")
                 np.savez_compressed(depth_data_path, uv=uv, camera_coords=camera_coords)
 
@@ -343,77 +354,86 @@ def run_for_indir(in_dir,
     return None
 
 
-def run_for_scenes_or_indir(args):
-    """
-    ... or for one-off input dir
-    :param args:
-    :return:
-    """
-    if args.input_dir is None:
+def run_for_scenes(scenes,
+                   max_items,
+                   undistort,
+                   only_info,
+                   megascenes_data_path,
+                   marigold_rel_path,
+                   old_file_keys,
+                   write):
 
-        if args.scenes == ["all"]:
-            scenes = sorted([pathlib.Path(i).parent.name for i in glob.glob(f"../datasets/megascenes/*/reconstruct")])
-            print(f"all scenes: {scenes}")
-        else:
-            scenes = args.scenes
+    def get_all_scenes():
+        return sorted([pathlib.Path(i).parent.parent.name for i in glob.glob(f"{megascenes_data_path}/*/reconstruct/colmap")])
 
-        # marigold_rel_path = "../Marigold"
-        marigold_rel_path = "../marigold_private"
+    if scenes == ["all"]:
+        scenes = get_all_scenes()
+        print(f"all scenes: {scenes}")
+    elif scenes == ["new"]:
+        all_scenes = get_all_scenes()
+        ls_scenes = set(os.listdir(f"{marigold_rel_path}/data/sfm/data"))
+        scenes = list(set(all_scenes) - ls_scenes)
+        print(f"all scenes: {all_scenes}")
+        print(f"new scenes: {scenes}")
 
-        print("create the symlinks")
-        print(f"pushd {marigold_rel_path}/data/sfm")
-        print("mkdir ./images")
-        for scene in scenes:
-            print(f"ln -s ../../../../datasets/megascenes/{scene}/images/commons ./images/{scene}")
-        print("popd")
+    print("create the symlinks")
+    print(f"pushd {marigold_rel_path}/data/sfm")
+    print("mkdir -p ./images")
+    for scene in scenes:
+        print(f"ln -s ../../../../datasets/megascenes/{scene}/images/commons ./images/{scene}")
+    print("popd")
 
-        print("create dirs for undistorted imgs")
-        for scene in scenes:
-            print(f"mkdir -p {marigold_rel_path}/data/sfm/undistorted_images/{scene}")
+    print("create dirs for undistorted imgs")
+    for scene in scenes:
+        print(f"mkdir -p {marigold_rel_path}/data/sfm/undistorted_images/{scene}")
 
-        for scene in scenes:
-            print(f"Processing scene {scene} ...")
-            rec_root = os.path.join(f"../datasets/megascenes", scene, "reconstruct/colmap/")
-            reconstruction_dirs = sorted(list(Path(rec_root).glob("*")))
-            reconstruction_dirs = [str(rec_dir) for rec_dir in reconstruction_dirs if rec_dir.is_dir()]
-            dir_list = "\n".join([r for r in reconstruction_dirs])
-            print(f"Found reconstruction directories: {dir_list}\n")
+    for scene in scenes:
+        print(f"Processing scene {scene} ...")
+        rec_root = os.path.join(megascenes_data_path, scene, "reconstruct/colmap/")
+        reconstruction_dirs = sorted(list(Path(rec_root).glob("*")))
+        reconstruction_dirs = [str(rec_dir) for rec_dir in reconstruction_dirs if rec_dir.is_dir()]
+        dir_list = "\n".join([r for r in reconstruction_dirs])
+        print(f"Found reconstruction directories: {dir_list}\n")
 
-            output_dir_data = f"{marigold_rel_path}/data/sfm/data/{scene}"
-            output_dir_imgs = f"undistorted_images/{scene}" if args.undistort else f"images/{scene}"
-            orig_dir_imgs = f"images/{scene}"
-            rel_out_dir = str(pathlib.Path(output_dir_data).relative_to(pathlib.Path(f"{marigold_rel_path}/data/sfm")))
-            for i, rec_dir in enumerate(reconstruction_dirs):
-                r = run_for_indir(rec_dir,
-                                  output_dir_data,
-                                  output_dir_imgs,
-                                  orig_dir_imgs,
-                                  i != 0,
-                                  set(),
-                                  rel_out_dir,
-                                  undistort=args.undistort,
-                                  max_items=args.max_items,
-                                  write=False,
-                                  read_again=False)
-                if r is not None:
-                    break # to the outer loop (=next scene)
+        output_dir_data = f"{marigold_rel_path}/data/sfm/data/{scene}"
+        output_dir_imgs = f"undistorted_images/{scene}" if undistort else f"images/{scene}"
+        orig_dir_imgs = f"images/{scene}"
+        rel_out_dir = str(pathlib.Path(output_dir_data).relative_to(pathlib.Path(f"{marigold_rel_path}/data/sfm")))
 
-    else:
-        run_for_indir(args.input_dir,
-                      # TODO totally not tested
-                      args.output_dir,
-                      args.output_dir,
-                      args.output_dir,
-                      False,
-                      set(),
-                      None,
-                      undistort=args.undistort,
-                      max_items=args.max_items,
-                      write=False,
-                      read_again=False)
+        read_again = False
+        print("arguments: ")
+        print("reconstruction_dirs:")
+        print("\n".join(reconstruction_dirs))
+        print(f"{output_dir_data=}")
+        print(f"{output_dir_imgs=}")
+        print(f"{orig_dir_imgs=}")
+        print(f"{rel_out_dir=}")
+        print(f"{undistort=}")
+        print(f"{max_items=}")
+        print(f"{write=}")
+        print(f"{read_again=}")
+        print(f"{old_file_keys=}")
+
+        if only_info:
+            continue
+
+        for i, rec_dir in enumerate(reconstruction_dirs):
+            error = run_for_dir(rec_dir,
+                                output_dir_data,
+                                output_dir_imgs,
+                                orig_dir_imgs,
+                                i != 0,
+                                rel_out_dir,
+                                undistort=undistort,
+                                max_items=max_items,
+                                read_again=read_again,
+                                write=write,
+                                old_file_keys=old_file_keys)
+            if error is not None:
+                break # to the outer loop (= process next scene)
 
 
-class Data:
+class Log:
     output = []
 
 
@@ -422,26 +442,52 @@ if __name__ == '__main__':
     s = time.time()
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--scenes", nargs="+", help="scene (e.g., prasna_brana)", required=False)
-    parser.add_argument("--input_dir", help="path to input model dir", required=False)
-    parser.add_argument("--output_dir", help="path to output dir", required=False)
+    parser.add_argument("--scenes",
+                        nargs="+",
+                        help="scenes (e.g., prasna_brana karluv most), or 'all' or 'new'",
+                        required=False, default=["all"])
     parser.add_argument("--max_items", help="max images per reconstruction", type=int, required=False, default=None)
-    #
-    parser.add_argument("--undistort", action="store_true", required=False)
-    parser.add_argument("--no-undistort", action="store_false", required=False)
+    parser.add_argument("--undistort", action=argparse.BooleanOptionalAction, required=False, default=True)
+    parser.add_argument("--only_info", action=argparse.BooleanOptionalAction, required=False, default=False)
+    parser.add_argument("--old_file_keys", action=argparse.BooleanOptionalAction, required=False, default=False)
+    parser.add_argument("--write", action=argparse.BooleanOptionalAction, required=False, default=False)
+
+    # new RCI
+    # megascenes_data_path = "/mnt/personal/vavravac/datasets/megascenes"
+    # old RCI
+    # megascenes_data_path = "../datasets/megascenes"
+    # local
+    # megascenes_data_path = "../../Desktop/mount_rci/datasets/megascenes"
+    parser.add_argument("--megascenes_data_path",
+                        type=str,
+                        required=False,
+                        default="/mnt/personal/vavravac/datasets/megascenes")
+
+    # old CMP
+    # marigold_rel_path = "../Marigold"
+    # RCI
+    # marigold_rel_path = "../marigold_private"
+    # local
+    # marigold_rel_path = "../../Desktop/mount_rci/marigold_private"
+    parser.add_argument("--marigold_rel_path",
+                        type=str,
+                        required=False,
+                        default="../marigold_private")
+
 
     args = parser.parse_args()
 
-    if args.scenes is None and (args.input_dir is None or args.output_dir is None):
-        raise ValueError("Missing --scene and (--input_dir or --output_dir)")
-
-    if args.scenes is not None and (args.input_dir is not None or args.output_dir is not None):
-        raise ValueError("--scene and (--input_dir or --output_dir) both present")
-
-    run_for_scenes_or_indir(args)
+    run_for_scenes(args.scenes,
+                   args.max_items,
+                   args.undistort,
+                   args.only_info,
+                   args.megascenes_data_path,
+                   args.marigold_rel_path,
+                   args.old_file_keys,
+                   args.write)
     e = time.time()
     Stats.print_stats()
     print(f"Elapsed time: {e-s:.03f} s.")
 
-    for line in Data.output:
+    for line in Log.output:
         print(line)

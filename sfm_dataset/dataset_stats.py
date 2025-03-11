@@ -15,8 +15,6 @@ from tqdm import tqdm
 
 from utils import config_logging
 
-img_suffixes = set([".jpg", ".jpeg", ".png"])
-
 
 class Log:
 
@@ -112,6 +110,7 @@ def get_image_stats(name, short_i, data):
 
 def get_images_sizes(short_i):
 
+    IMG_SUFFIXES = set([".jpg", ".jpeg", ".png"])
     images = []
     sizes = []
 
@@ -126,7 +125,7 @@ def get_images_sizes(short_i):
         file_entry = l_s[3]
         p = pathlib.Path(file_entry)
         if set(p.parts).__contains__("pictures"):
-            if not p.suffix.lower() in img_suffixes:
+            if not p.suffix.lower() in IMG_SUFFIXES:
                 Log.stats["uknown_suffix"].append(p)
                 Log.add_log(f"Unknown suffix in pictures dir: {p}")
             else:
@@ -134,7 +133,7 @@ def get_images_sizes(short_i):
                 images.append(str(p))
                 sizes.append(size_entry)
 
-        elif p.suffix in img_suffixes:
+        elif p.suffix in IMG_SUFFIXES:
             Log.stats["img_not_in_pictures_dir"].append(str(p))
             Log.add_log(f"Image not in pictures dir: {p}")
 

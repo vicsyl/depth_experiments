@@ -11,10 +11,11 @@ def mk_and_get_out_dir():
     return dir
 
 
-def config_logging(out_dir=None):
+def config_logging(out_dir=None,
+                   log_to_file=False,
+                   console_level=20):
 
-    log_to_file = False
-    console_level = 20
+
     file_level = 10 if log_to_file else console_level
 
     log_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(filename)s - %(funcName)s: %(lineno)d >> %(message)s')
