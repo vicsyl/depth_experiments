@@ -35,7 +35,14 @@ python -u depths_from_sfm.py \
 
 ```
 
+run it through
+
+``` 
+ ~/dev/depth_experiments_rci$ ../marigold_private/my_sbatch.sh ./scripts/slurm_depth_from_sfm.sh 
+```
+
 ### Generate the split
+
 
 ### Use the dataset for training
 

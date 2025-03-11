@@ -176,7 +176,6 @@ def run_for_dir(in_dir,
     :param append:
     :param write:
     :param read_again:
-    :return: error (in str) or None
     """
 
     conflict_names = set()
@@ -216,10 +215,8 @@ def run_for_dir(in_dir,
 
             # IMHO this looks to the symlink
             if not os.path.exists(eff_rgb_path):
-                if len(Log.output) == 0:
-                    Log.output.append(f"In reconstruction dir {in_dir} missing path {eff_rgb_path}")
-                Log.output.append(in_dir)
-                return "missing"
+                Log.cur_output.append(f"In reconstruction dir {in_dir} missing path {eff_rgb_path}")
+                continue
             img_np = cv.imread(eff_rgb_path)
             c_width, c_height, calib_matrix, camera_params, dist_coeffs, swapped = get_camera_params(reconstruction,
                                                                                                      colmap_image,
@@ -349,7 +346,6 @@ def run_for_dir(in_dir,
                 print("debug me")
 
     Stats.stat_m["valid_points"].append(valid_points)
-    return None
 
 
 def run_for_scenes(scenes,
@@ -416,25 +412,43 @@ def run_for_scenes(scenes,
         if only_info:
             continue
 
+        Log.flush()
+
         for i, rec_dir in enumerate(reconstruction_dirs):
-            error = run_for_dir(rec_dir,
-                                output_dir_data,
-                                output_dir_imgs,
-                                orig_dir_imgs,
-                                marigold_rel_path,
-                                i != 0,
-                                rel_out_dir,
-                                undistort=undistort,
-                                max_items=max_items,
-                                read_again=read_again,
-                                write=write,
-                                old_file_keys=old_file_keys)
-            if error is not None:
-                break # to the outer loop (= process next scene)
+            run_for_dir(rec_dir,
+                        output_dir_data,
+                        output_dir_imgs,
+                        orig_dir_imgs,
+                        marigold_rel_path,
+                        i != 0,
+                        rel_out_dir,
+                        undistort=undistort,
+                        max_items=max_items,
+                        read_again=read_again,
+                        write=write,
+                        old_file_keys=old_file_keys)
+
+        notok_file = os.path.join(output_dir_data, f"not_ok_log.txt")
+        ok_file = os.path.join(output_dir_data, f"ok_log.txt")
+
+        if len(Log.cur_output) == 0:
+            with open(ok_file, "w") as lf:
+                lf.write("All OK\n")
+        else:
+            with open(notok_file, "w") as lf:
+                lf.write("There were problems\n")
+                for line in Log.cur_output:
+                    lf.write(line + "\n")
 
 
 class Log:
-    output = []
+    cur_output = []
+    whole_output = []
+
+    @staticmethod
+    def flush():
+        Log.whole_output.extend(Log.cur_output)
+        Log.cur_output = []
 
 
 if __name__ == '__main__':
@@ -487,7 +501,8 @@ if __name__ == '__main__':
                    args.write)
     e = time.time()
     Stats.print_stats()
+    print(f"DONE ALL")
     print(f"Elapsed time: {e-s:.03f} s.")
 
-    for line in Log.output:
+    for line in Log.whole_output:
         print(line)
