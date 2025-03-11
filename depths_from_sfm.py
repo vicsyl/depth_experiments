@@ -141,6 +141,7 @@ def run_for_dir(in_dir,
                 out_dir_data,
                 out_dir_images,
                 orig_out_dir_images,
+                marigold_rel_path,
                 append: bool,
                 rel_out_dir,
                 undistort=True,
@@ -204,9 +205,6 @@ def run_for_dir(in_dir,
         if max_items:
             image_items = image_items[:max_items]
         print(f"Number of images: {len(image_items)}")
-
-        marigold_rel_path = "../Marigold"
-        # marigold_rel_path = "../marigold_private"
 
         for _, colmap_image in tqdm(image_items):
 
@@ -407,6 +405,7 @@ def run_for_scenes(scenes,
         print(f"{output_dir_data=}")
         print(f"{output_dir_imgs=}")
         print(f"{orig_dir_imgs=}")
+        print(f"{marigold_rel_path=}")
         print(f"{rel_out_dir=}")
         print(f"{undistort=}")
         print(f"{max_items=}")
@@ -422,6 +421,7 @@ def run_for_scenes(scenes,
                                 output_dir_data,
                                 output_dir_imgs,
                                 orig_dir_imgs,
+                                marigold_rel_path,
                                 i != 0,
                                 rel_out_dir,
                                 undistort=undistort,

@@ -21,11 +21,23 @@
 * e.g. ~/dev/datasets/megascenes$ ./run_download.sh '025/041' 'Santa_Maria_del_Fiore_Florence'
 
 
-
 ### Add the data to SfM dataset
 
-* e.g. ~/dev/datasets/megascenes$ ./run_download.sh '025/041' 'Santa_Maria_del_Fiore_Florence'
+* e.g. 
 
+```
+python -u depths_from_sfm.py \ 
+      --write \
+      --no-only_info \
+      --scenes new \
+      --megascenes_data_path '../datasets/megascenes' \
+       --marigold_rel_path '../marigold_private'"
+
+```
+
+### Generate the split
+
+### Use the dataset for training
 
 
 
