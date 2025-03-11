@@ -3,6 +3,7 @@ import logging
 import os.path
 import pathlib
 import random
+import time
 
 import numpy as np
 import argparse
@@ -151,7 +152,7 @@ def generate_splits_for_scene(splits_scenes_limits,
             all_lines = all_lines[:split_limit]
 
         with open(os.path.join(dataset_dir, f"{prefix}_{split}.txt"), "w") as fw:
-            fw.write(f"# This is {split} for {max_per_scene=}, {max_dimension=}, {min_points=}, {shuffle=}\n")
+            fw.write(f"# This is {split} for {max_per_scene=}, {max_dimension=}, {min_points=}, {shuffle=}, {split_limit=}\n")
             fw.write("".join(all_lines))
             fw.write("\n")
 
@@ -210,6 +211,7 @@ def run_for_scene_random(scenes, max_per_scene, prefix):
 
 def main():
 
+    s = time.time()
     config_logging()
 
     # scenes_paths = get_scenes_info()
@@ -282,6 +284,10 @@ def main():
                               shuffle=args.shuffle,
                               max_dimension=args.max_dimension,
                               min_points=args.min_points)
+
+    e = time.time()
+    print(f"DONE ALL")
+    print(f"Elapsed time: {e-s:.03f} s.")
 
 
 if __name__ == '__main__':
